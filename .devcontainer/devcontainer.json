@@ -1,0 +1,41 @@
+{
+  "name": "Chat Online - Python",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/mysql:1": {
+      "version": "8.0"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  },
+  
+  "postCreateCommand": [
+    "pip install -r requirements.txt",
+    "mysql -u root -e 'CREATE DATABASE IF NOT EXISTS chat_online;'",
+    "mysql -u root chat_online < init.sql"
+  ],
+  
+  "forwardPorts": [8765, 3000, 3306],
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.debugpy",
+        "ms-vscode.vscode-json",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true
+      }
+    }
+  },
+  
+  "mounts": [
+    "source=${localWorkspaceFolder}/.devcontainer/mysql-data,target=/var/lib/mysql,type=volume"
+  ]
+}

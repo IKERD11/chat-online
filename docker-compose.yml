@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Base de datos MySQL
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: chat_online
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+  # Servidor WebSocket
+  chat-server:
+    build: .
+    ports:
+      - "8765:8765"
+    environment:
+      DB_HOST: mysql
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: chat_online
+      WS_PORT: 8765
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  # Servidor web para servir archivos estáticos
+  web-server:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./web:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - chat-server
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
