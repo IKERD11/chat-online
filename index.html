@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Online - Versión Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 800px;
+            height: 90%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chat-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .theme-selector {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .theme-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-claro { background: linear-gradient(45deg, #74b9ff, #0984e3); }
+        .theme-oscuro { background: linear-gradient(45deg, #2d3436, #636e72); }
+        .theme-gris { background: linear-gradient(45deg, #b2bec3, #74b9ff); }
+        .theme-rosado { background: linear-gradient(45deg, #fd79a8, #e84393); }
+        .theme-verde { background: linear-gradient(45deg, #00b894, #00cec9); }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .message.sent {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .message.received {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        .message .username {
+            font-weight: bold;
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .message-input:focus {
+            border-color: #667eea;
+        }
+
+        .send-btn {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .login-container {
+            width: 400px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .status.online { background: #00b894; }
+        .status.offline { background: #e17055; }
+        .status.connecting { background: #fdcb6e; color: #333; }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Pantalla de Login -->
+    <div id="loginContainer" class="login-container">
+        <h2>🚀 Chat Online</h2>
+        <p>Conecta con usuarios de todo el mundo</p>
+        <br>
+        <input type="text" id="username" class="login-input" placeholder="Usuario" required>
+        <input type="password" id="password" class="login-input" placeholder="Contraseña" required>
+        <button onclick="login()" class="login-btn">Iniciar Sesión</button>
+        <button onclick="register()" class="login-btn" style="background: linear-gradient(45deg, #00b894, #00cec9);">Registrarse</button>
+        <button onclick="loginGuest()" class="login-btn" style="background: linear-gradient(45deg, #636e72, #2d3436);">Modo Invitado</button>
+    </div>
+
+    <!-- Chat Principal -->
+    <div id="chatContainer" class="chat-container hidden">
+        <div class="chat-header">
+            <h1>🚀 Chat Online</h1>
+            <div class="theme-selector">
+                <button class="theme-btn theme-claro" onclick="cambiarTema('claro')" title="Tema Claro"></button>
+                <button class="theme-btn theme-oscuro" onclick="cambiarTema('oscuro')" title="Tema Oscuro"></button>
+                <button class="theme-btn theme-gris" onclick="cambiarTema('gris')" title="Tema Gris"></button>
+                <button class="theme-btn theme-rosado" onclick="cambiarTema('rosado')" title="Tema Rosado"></button>
+                <button class="theme-btn theme-verde" onclick="cambiarTema('verde')" title="Tema Verde"></button>
+            </div>
+        </div>
+        
+        <div id="messages" class="chat-messages"></div>
+        
+        <div class="chat-input">
+            <input type="text" id="messageInput" class="message-input" placeholder="Escribe tu mensaje..." 
+                   onkeypress="if(event.key==='Enter') enviarMensaje()">
+            <button onclick="enviarMensaje()" class="send-btn">Enviar</button>
+        </div>
+    </div>
+
+    <!-- Estado de Conexión -->
+    <div id="status" class="status connecting">Conectando...</div>
+
+    <script>
+        let ws = null;
+        let currentUser = '';
+        let reconnectAttempts = 0;
+        const maxReconnectAttempts = 5;
+
+        // Configuración del servidor
+        const WS_URL = window.location.hostname === 'localhost' 
+            ? 'ws://localhost:8765' 
+            : 'wss://tu-backend.railway.app'; // Cambiar por tu servidor WebSocket en producción
+
+        function conectarWebSocket() {
+            try {
+                ws = new WebSocket(WS_URL);
+                
+                ws.onopen = function() {
+                    console.log('✅ Conectado al servidor');
+                    document.getElementById('status').textContent = 'Conectado';
+                    document.getElementById('status').className = 'status online';
+                    reconnectAttempts = 0;
+                };
+                
+                ws.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    manejarMensaje(data);
+                };
+                
+                ws.onclose = function() {
+                    console.log('❌ Conexión cerrada');
+                    document.getElementById('status').textContent = 'Desconectado';
+                    document.getElementById('status').className = 'status offline';
+                    
+                    // Intentar reconectar
+                    if (reconnectAttempts < maxReconnectAttempts) {
+                        setTimeout(() => {
+                            reconnectAttempts++;
+                            console.log(`🔄 Reintentando conexión (${reconnectAttempts}/${maxReconnectAttempts})`);
+                            conectarWebSocket();
+                        }, 3000);
+                    }
+                };
+                
+                ws.onerror = function(error) {
+                    console.log('❌ Error de WebSocket:', error);
+                };
+                
+            } catch (error) {
+                console.log('❌ Error conectando:', error);
+            }
+        }
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+            
+            currentUser = username;
+            enviarAlServidor({
+                tipo: 'login',
+                usuario: username,
+                password: password
+            });
+        }
+
+        function register() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+            
+            currentUser = username;
+            enviarAlServidor({
+                tipo: 'registro',
+                usuario: username,
+                password: password
+            });
+        }
+
+        function loginGuest() {
+            const username = 'Invitado_' + Math.random().toString(36).substr(2, 5);
+            currentUser = username;
+            
+            enviarAlServidor({
+                tipo: 'invitado',
+                usuario: username
+            });
+        }
+
+        function enviarMensaje() {
+            const input = document.getElementById('messageInput');
+            const mensaje = input.value.trim();
+            
+            if (!mensaje) return;
+            
+            enviarAlServidor({
+                tipo: 'mensaje',
+                usuario: currentUser,
+                mensaje: mensaje,
+                sala: 'General'
+            });
+            
+            input.value = '';
+        }
+
+        function enviarAlServidor(data) {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify(data));
+            } else {
+                console.log('❌ No hay conexión al servidor');
+            }
+        }
+
+        function manejarMensaje(data) {
+            switch(data.tipo) {
+                case 'login_exitoso':
+                    mostrarChat();
+                    break;
+                case 'registro_exitoso':
+                    alert('¡Registro exitoso! Ahora puedes chatear');
+                    mostrarChat();
+                    break;
+                case 'error':
+                    alert('Error: ' + data.mensaje);
+                    break;
+                case 'mensaje':
+                    mostrarMensajeEnChat(data.usuario, data.mensaje, data.usuario === currentUser);
+                    break;
+            }
+        }
+
+        function mostrarChat() {
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('chatContainer').classList.remove('hidden');
+        }
+
+        function mostrarMensajeEnChat(usuario, mensaje, esMio) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${esMio ? 'sent' : 'received'}`;
+            
+            if (!esMio) {
+                messageDiv.innerHTML = `<div class="username">${usuario}</div>${mensaje}`;
+            } else {
+                messageDiv.innerHTML = mensaje;
+            }
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function cambiarTema(tema) {
+            const root = document.documentElement;
+            
+            switch(tema) {
+                case 'claro':
+                    root.style.setProperty('--primary-gradient', 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)');
+                    break;
+                case 'oscuro':
+                    root.style.setProperty('--primary-gradient', 'linear-gradient(135deg, #2d3436 0%, #636e72 100%)');
+                    break;
+                case 'gris':
+                    root.style.setProperty('--primary-gradient', 'linear-gradient(135deg, #b2bec3 0%, #74b9ff 100%)');
+                    break;
+                case 'rosado':
+                    root.style.setProperty('--primary-gradient', 'linear-gradient(135deg, #fd79a8 0%, #e84393 100%)');
+                    break;
+                case 'verde':
+                    root.style.setProperty('--primary-gradient', 'linear-gradient(135deg, #00b894 0%, #00cec9 100%)');
+                    break;
+            }
+        }
+
+        // Iniciar conexión al cargar la página
+        window.onload = function() {
+            conectarWebSocket();
+        };
+    </script>
+</body>
+</html>
