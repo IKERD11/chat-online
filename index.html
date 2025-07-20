@@ -1371,6 +1371,194 @@
             display: none !important; 
         }
 
+        /* 🔐 ESTILOS PARA SISTEMA DE SEGURIDAD */
+        .intrusion-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.3);
+            z-index: 10000;
+            min-width: 300px;
+            max-width: 500px;
+            animation: alertPulse 0.5s ease-out;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes alertPulse {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .alert-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .alert-content {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .intrusion-alert button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            float: right;
+        }
+
+        .intrusion-alert button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Indicadores de seguridad */
+        .security-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .security-indicator:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .security-indicator.warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .security-indicator.danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            animation: dangerPulse 2s infinite;
+        }
+
+        @keyframes dangerPulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 15px rgba(231, 76, 60, 0.6);
+            }
+        }
+
+        /* Mensajes del bot moderador mejorados */
+        .bot-message {
+            background: linear-gradient(45deg, #667eea, #764ba2) !important;
+            border-left: 4px solid #ffd700 !important;
+        }
+
+        .bot-avatar {
+            background: linear-gradient(45deg, #ffd700, #ffed4e) !important;
+            color: #333 !important;
+            font-size: 16px !important;
+        }
+
+        .message.bot-message .bot-indicator {
+            background: rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* Alertas de notificación mejoradas */
+        .notification.warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border-left: 4px solid #f1c40f;
+        }
+
+        .notification.danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .notification.info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-left: 4px solid #74b9ff;
+        }
+
+        /* Estilos para panel de administración */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .admin-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Indicador de estado de sistema */
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            margin: 2px 0;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-color);
+        }
+
+        .status-dot.warning {
+            background: var(--warning-color);
+        }
+
+        .status-dot.danger {
+            background: var(--error-color);
+        }
+
         /* Scrollbar personalizado */
         ::-webkit-scrollbar {
             width: 8px;
@@ -1581,6 +1769,11 @@
     <!-- Estado de Conexión -->
     <div id="status" class="status connecting">🔄 Conectando...</div>
 
+    <!-- Indicador de Seguridad -->
+    <div id="securityIndicator" class="security-indicator" onclick="mostrarEstadoSeguridad()" title="Estado de seguridad">
+        🛡️ Seguridad Activa
+    </div>
+
     <script>
         // Variables globales
         let ws = null;
@@ -1609,6 +1802,44 @@
         let encryptionKey = null; // Clave de cifrado
         let is2FAEnabled = false; // 2FA habilitado
         let chatBots = new Map(); // Bots disponibles
+        
+        // 🔐 SISTEMA DE SEGURIDAD AVANZADO
+        let securityConfig = {
+            antiSpam: {
+                enabled: true,
+                messageLimit: 5, // mensajes por minuto
+                suspiciousWords: ['spam', 'bot', 'hack', 'virus', 'scam', 'phishing', 'malware'],
+                repeatedMessageThreshold: 3,
+                capsLockThreshold: 0.7, // 70% del mensaje en mayúsculas
+                linkThreshold: 3 // máximo 3 enlaces por mensaje
+            },
+            ipControl: {
+                enabled: true,
+                whitelist: new Set(['127.0.0.1', '::1']), // IPs permitidas
+                blacklist: new Set(), // IPs bloqueadas
+                maxConnectionsPerIP: 3
+            },
+            userLimits: {
+                maxConcurrentUsers: 100,
+                maxUsernameLength: 20,
+                minUsernameLength: 3,
+                bannedUsernames: new Set(['admin', 'moderator', 'bot', 'system'])
+            },
+            intrusionDetection: {
+                enabled: true,
+                suspiciousActivityThreshold: 10,
+                rapidConnectionAttempts: 5,
+                timeWindow: 60000 // 1 minuto en ms
+            }
+        };
+        
+        let auditLogs = []; // 📊 Registro de auditoría
+        let userMetrics = new Map(); // Métricas por usuario
+        let connectionAttempts = new Map(); // Intentos de conexión por IP
+        let messageHistory = new Map(); // Historial de mensajes por usuario
+        let suspiciousActivity = new Map(); // Actividad sospechosa por usuario
+        let themeScheduler = null; // Programador de temas dinámicos
+        let moderationBot = null; // Bot de moderación
         
         const maxReconnectAttempts = 5;
         const WS_URL = window.location.hostname === 'localhost' 
@@ -1657,9 +1888,9 @@
                             reconnectAttempts++;
                             console.log(`🔄 Reintento de conexión ${reconnectAttempts}/${maxReconnectAttempts}`);
                             conectarWebSocket();
-                        }, 3000 + (reconnectAttempts * 2000)); // Incrementar tiempo entre reintentos
+                        }, 3000);
                     } else {
-                        mostrarNotificacion('Se perdió la conexión. Recarga la página para reconectar.', 'error');
+                        mostrarNotificacion('❌ No se pudo reconectar al servidor', 'error');
                     }
                 };
                 
@@ -1669,8 +1900,9 @@
                 };
                 
             } catch (error) {
-                console.error('❌ Error al crear WebSocket:', error);
+                console.error('❌ Error al conectar WebSocket:', error);
                 actualizarStatus('offline', '❌ Error de conexión');
+                mostrarNotificacion('❌ Error al conectar con el servidor', 'error');
             }
         }
 
@@ -1765,6 +1997,27 @@
                 return;
             }
             
+            // 🔐 VALIDACIONES DE SEGURIDAD
+            
+            // 1. Verificar límites de usuarios
+            const validacionUsuario = verificarLimitesUsuarios(apodo);
+            if (!validacionUsuario.permitido) {
+                mostrarNotificacion(`🚫 ${validacionUsuario.razon}`, 'error');
+                registrarAuditoria('LOGIN_REJECTED', apodo, validacionUsuario.razon);
+                return;
+            }
+            
+            // 2. Verificar control de IP (simulado para frontend)
+            const ipSimulada = '127.0.0.1'; // En producción sería la IP real
+            const validacionIP = verificarControlIP(ipSimulada);
+            if (!validacionIP.permitido) {
+                mostrarNotificacion(`🚫 ${validacionIP.razon}`, 'error');
+                return;
+            }
+            
+            // 3. Detectar actividad de conexión
+            detectarActividadSospechosa(apodo, 'CONEXION', 'Login como invitado');
+            
             // Usar el apodo ingresado por el usuario
             currentUser = apodo;
             document.getElementById('currentUserDisplay').textContent = apodo;
@@ -1781,6 +2034,12 @@
             
             // Actualizar estadísticas inmediatamente
             actualizarEstadisticas();
+            
+            // Inicializar sistemas de seguridad
+            inicializarSistemasSeguridad();
+            
+            // Registrar en auditoría
+            registrarAuditoria('GUEST_LOGIN_SUCCESS', apodo, `Sala: ${sala}`);
         }
 
         // =========================
@@ -1803,6 +2062,23 @@
                 return;
             }
             
+            // 🔐 VALIDACIONES DE SEGURIDAD
+            
+            // 1. Verificar anti-spam
+            const analisisSpam = analizarAntiSpam(currentUser, mensaje);
+            if (!analisisSpam.permitido) {
+                mostrarNotificacion(`🚫 Mensaje bloqueado: ${analisisSpam.razon}`, 'error');
+                detectarActividadSospechosa(currentUser, 'SPAM_ATTEMPT', analisisSpam.razon);
+                return;
+            }
+            
+            // 2. Censurar mensaje si es necesario
+            const resultadoCensura = censurarMensaje(currentUser, mensaje);
+            const mensajeEnviar = resultadoCensura.mensajeLimpio;
+            
+            // 3. Detectar actividad sospechosa
+            detectarActividadSospechosa(currentUser, 'MESSAGE_SENT', `Longitud: ${mensaje.length}`);
+            
             // Detener indicador de escritura al enviar mensaje
             if (isTyping) {
                 isTyping = false;
@@ -1818,7 +2094,7 @@
             const mensajeData = {
                 tipo: 'mensaje',
                 usuario: currentUser,
-                mensaje: mensaje,
+                mensaje: mensajeEnviar, // Usar mensaje censurado
                 sala: 'General',
                 timestamp: new Date().toISOString()
             };
@@ -1835,6 +2111,9 @@
             ajustarAlturaTextarea(input);
             messageCount++;
             actualizarEstadisticas();
+            
+            // Registrar en auditoría
+            registrarAuditoria('MESSAGE_SENT', currentUser, `Mensaje enviado (${mensajeEnviar.length} chars)`);
         }
 
         function manejarTeclado(event) {
@@ -1934,29 +2213,416 @@
                     break;
                     
                 case 'user_connected':
-                    if (data.usuario !== currentUser) {
-                        connectedUsers.add(data.usuario);
-                        actualizarListaUsuarios();
-                        mostrarMensajeSistema(`${data.usuario} se ha conectado al chat`);
-                    }
+                    connectedUsers.add(data.usuario);
+                    actualizarListaUsuarios();
+                    mostrarMensajeSistema(`${data.usuario} se ha conectado al chat`);
                     break;
                     
                 case 'user_disconnected':
                     connectedUsers.delete(data.usuario);
-                    typingUsers.delete(data.usuario); // Remover de usuarios escribiendo
                     actualizarListaUsuarios();
-                    actualizarIndicadorEscritura();
                     mostrarMensajeSistema(`${data.usuario} se ha desconectado del chat`);
                     break;
                     
                 case 'usuarios_conectados':
-                    connectedUsers = new Set(data.usuarios || []);
-                    actualizarListaUsuarios();
+                    if (data.usuarios) {
+                        connectedUsers.clear();
+                        data.usuarios.forEach(user => connectedUsers.add(user));
+                        actualizarListaUsuarios();
+                    }
                     break;
                     
                 default:
-                    console.log('Tipo de mensaje no reconocido:', data);
+                    console.log('Tipo de mensaje no reconocido:', data.tipo);
+                    break;
             }
+        }
+
+        // 🔐 SISTEMA DE SEGURIDAD Y ANTI-SPAM AVANZADO
+        // =========================
+        
+        // 🚫 Anti-spam inteligente con ML básico
+        function analizarAntiSpam(usuario, mensaje) {
+            if (!securityConfig.antiSpam.enabled) return { permitido: true, razon: '' };
+            
+            const analisis = {
+                permitido: true,
+                razon: '',
+                puntuacionSospechosa: 0
+            };
+            
+            // 1. Verificar límite de mensajes por minuto
+            if (!messageHistory.has(usuario)) {
+                messageHistory.set(usuario, []);
+            }
+            
+            const ahora = Date.now();
+            const historial = messageHistory.get(usuario);
+            
+            // Limpiar mensajes antiguos (más de 1 minuto)
+            const mensajesRecientes = historial.filter(tiempo => ahora - tiempo < 60000);
+            messageHistory.set(usuario, mensajesRecientes);
+            
+            if (mensajesRecientes.length >= securityConfig.antiSpam.messageLimit) {
+                analisis.permitido = false;
+                analisis.razon = 'Límite de mensajes por minuto excedido';
+                registrarAuditoria('SPAM_DETECTED', usuario, `Límite de mensajes: ${mensajesRecientes.length}/min`);
+                return analisis;
+            }
+            
+            // 2. Detectar palabras sospechosas
+            const palabrasEncontradas = securityConfig.antiSpam.suspiciousWords.filter(palabra => 
+                mensaje.toLowerCase().includes(palabra.toLowerCase())
+            );
+            
+            if (palabrasEncontradas.length > 0) {
+                analisis.puntuacionSospechosa += palabrasEncontradas.length * 2;
+                registrarAuditoria('SUSPICIOUS_WORDS', usuario, `Palabras: ${palabrasEncontradas.join(', ')}`);
+            }
+            
+            // 3. Detectar mensajes repetidos
+            const ultimosMensajes = historial.slice(-securityConfig.antiSpam.repeatedMessageThreshold);
+            const mensajesIguales = ultimosMensajes.filter(msg => msg.texto === mensaje).length;
+            
+            if (mensajesIguales >= securityConfig.antiSpam.repeatedMessageThreshold) {
+                analisis.permitido = false;
+                analisis.razon = 'Mensaje repetido detectado';
+                registrarAuditoria('REPEATED_MESSAGE', usuario, `Mensaje repetido ${mensajesIguales} veces`);
+                return analisis;
+            }
+            
+            // 4. Detectar abuso de mayúsculas
+            const mayusculas = (mensaje.match(/[A-Z]/g) || []).length;
+            const porcentajeMayusculas = mayusculas / mensaje.length;
+            
+            if (porcentajeMayusculas > securityConfig.antiSpam.capsLockThreshold && mensaje.length > 10) {
+                analisis.puntuacionSospechosa += 3;
+                registrarAuditoria('CAPS_ABUSE', usuario, `${Math.round(porcentajeMayusculas * 100)}% mayúsculas`);
+            }
+            
+            // 5. Detectar enlaces excesivos
+            const enlaces = (mensaje.match(/https?:\/\/[^\s]+/g) || []).length;
+            if (enlaces > securityConfig.antiSpam.linkThreshold) {
+                analisis.permitido = false;
+                analisis.razon = 'Demasiados enlaces en el mensaje';
+                registrarAuditoria('EXCESSIVE_LINKS', usuario, `${enlaces} enlaces detectados`);
+                return analisis;
+            }
+            
+            // 6. Puntuación general de sospecha
+            if (analisis.puntuacionSospechosa >= 5) {
+                analisis.permitido = false;
+                analisis.razon = 'Contenido sospechoso detectado por IA';
+                registrarAuditoria('AI_SPAM_DETECTION', usuario, `Puntuación: ${analisis.puntuacionSospechosa}`);
+            }
+            
+            // Registrar mensaje válido
+            mensajesRecientes.push({ tiempo: ahora, texto: mensaje });
+            messageHistory.set(usuario, mensajesRecientes);
+            
+            return analisis;
+        }
+        
+        // 🚪 Control de acceso por IP
+        function verificarControlIP(ip) {
+            if (!securityConfig.ipControl.enabled) return { permitido: true, razon: '' };
+            
+            // Verificar blacklist
+            if (securityConfig.ipControl.blacklist.has(ip)) {
+                registrarAuditoria('IP_BLOCKED', 'Sistema', `IP bloqueada: ${ip}`);
+                return { permitido: false, razon: 'IP bloqueada por el administrador' };
+            }
+            
+            // Verificar whitelist (si no está vacía)
+            if (securityConfig.ipControl.whitelist.size > 0 && !securityConfig.ipControl.whitelist.has(ip)) {
+                registrarAuditoria('IP_NOT_WHITELISTED', 'Sistema', `IP no autorizada: ${ip}`);
+                return { permitido: false, razon: 'IP no autorizada' };
+            }
+            
+            // Verificar límite de conexiones por IP
+            if (!connectionAttempts.has(ip)) {
+                connectionAttempts.set(ip, { count: 0, lastAttempt: Date.now() });
+            }
+            
+            const conexiones = connectionAttempts.get(ip);
+            if (conexiones.count >= securityConfig.ipControl.maxConnectionsPerIP) {
+                registrarAuditoria('IP_CONNECTION_LIMIT', 'Sistema', `Límite de conexiones excedido: ${ip}`);
+                return { permitido: false, razon: 'Demasiadas conexiones desde esta IP' };
+            }
+            
+            conexiones.count++;
+            conexiones.lastAttempt = Date.now();
+            connectionAttempts.set(ip, conexiones);
+            
+            return { permitido: true, razon: '' };
+        }
+        
+        // 👥 Control de límites de usuarios
+        function verificarLimitesUsuarios(usuario) {
+            const limites = securityConfig.userLimits;
+            
+            // Verificar longitud del nombre de usuario
+            if (usuario.length < limites.minUsernameLength || usuario.length > limites.maxUsernameLength) {
+                return { 
+                    permitido: false, 
+                    razon: `El nombre debe tener entre ${limites.minUsernameLength} y ${limites.maxUsernameLength} caracteres` 
+                };
+            }
+            
+            // Verificar nombres prohibidos
+            if (limites.bannedUsernames.has(usuario.toLowerCase())) {
+                registrarAuditoria('BANNED_USERNAME', usuario, 'Intento de usar nombre prohibido');
+                return { permitido: false, razon: 'Nombre de usuario no permitido' };
+            }
+            
+            // Verificar límite de usuarios concurrentes
+            if (connectedUsers.size >= limites.maxConcurrentUsers) {
+                registrarAuditoria('USER_LIMIT_REACHED', usuario, `Límite alcanzado: ${connectedUsers.size}/${limites.maxConcurrentUsers}`);
+                return { permitido: false, razon: 'Límite de usuarios conectados alcanzado' };
+            }
+            
+            return { permitido: true, razon: '' };
+        }
+        
+        // 👁️ Sistema de detección de intrusos
+        function detectarActividadSospechosa(usuario, accion, detalle = '') {
+            if (!securityConfig.intrusionDetection.enabled) return;
+            
+            if (!suspiciousActivity.has(usuario)) {
+                suspiciousActivity.set(usuario, {
+                    eventos: [],
+                    puntuacion: 0,
+                    ultimaActividad: Date.now()
+                });
+            }
+            
+            const actividad = suspiciousActivity.get(usuario);
+            const ahora = Date.now();
+            
+            // Limpiar eventos antiguos
+            actividad.eventos = actividad.eventos.filter(evento => 
+                ahora - evento.timestamp < securityConfig.intrusionDetection.timeWindow
+            );
+            
+            // Agregar nuevo evento
+            actividad.eventos.push({
+                accion: accion,
+                detalle: detalle,
+                timestamp: ahora
+            });
+            
+            // Calcular puntuación de sospecha
+            let puntuacion = 0;
+            const eventosRecientes = actividad.eventos.length;
+            
+            if (eventosRecientes > securityConfig.intrusionDetection.suspiciousActivityThreshold) {
+                puntuacion += eventosRecientes * 2;
+            }
+            
+            // Detectar conexiones rápidas
+            const conexionesRapidas = actividad.eventos.filter(e => e.accion === 'CONEXION').length;
+            if (conexionesRapidas > securityConfig.intrusionDetection.rapidConnectionAttempts) {
+                puntuacion += conexionesRapidas * 3;
+                registrarAuditoria('RAPID_CONNECTIONS', usuario, `${conexionesRapidas} conexiones rápidas`);
+            }
+            
+            actividad.puntuacion = puntuacion;
+            actividad.ultimaActividad = ahora;
+            
+            // Alertar si la actividad es muy sospechosa
+            if (puntuacion > 20) {
+                mostrarAlertaIntrusion(usuario, puntuacion, actividad.eventos);
+                registrarAuditoria('INTRUSION_ALERT', usuario, `Puntuación de sospecha: ${puntuacion}`);
+            }
+            
+            suspiciousActivity.set(usuario, actividad);
+        }
+        
+        // 📊 Sistema de audit logs
+        function registrarAuditoria(evento, usuario, detalle = '') {
+            const registro = {
+                timestamp: new Date().toISOString(),
+                evento: evento,
+                usuario: usuario,
+                detalle: detalle,
+                ip: 'N/A', // En un entorno real, obtendríamos la IP
+                userAgent: navigator.userAgent
+            };
+            
+            auditLogs.push(registro);
+            
+            // Mantener solo los últimos 1000 registros
+            if (auditLogs.length > 1000) {
+                auditLogs = auditLogs.slice(-1000);
+            }
+            
+            console.log(`🔍 [AUDIT] ${evento}: ${usuario} - ${detalle}`);
+            
+            // Mostrar en interfaz si es crítico
+            if (['INTRUSION_ALERT', 'IP_BLOCKED', 'SPAM_DETECTED'].includes(evento)) {
+                mostrarNotificacion(`🚨 Alerta de seguridad: ${evento}`, 'warning');
+            }
+        }
+        
+        // 🌈 Sistema de temas dinámicos
+        function inicializarTemasDinamicos() {
+            // Programar cambios de tema según la hora
+            themeScheduler = setInterval(() => {
+                const hora = new Date().getHours();
+                let temaAutomatico = '';
+                
+                if (hora >= 6 && hora < 12) {
+                    temaAutomatico = 'claro'; // Mañana
+                } else if (hora >= 12 && hora < 18) {
+                    temaAutomatico = 'verde'; // Tarde
+                } else if (hora >= 18 && hora < 22) {
+                    temaAutomatico = 'rosado'; // Atardecer
+                } else {
+                    temaAutomatico = 'oscuro'; // Noche
+                }
+                
+                if (currentTheme !== temaAutomatico) {
+                    cambiarTema(temaAutomatico);
+                    mostrarNotificacion(`🌈 Tema cambiado automáticamente a ${temaAutomatico} según la hora`, 'info');
+                    registrarAuditoria('THEME_AUTO_CHANGE', currentUser, `Tema: ${temaAutomatico}, Hora: ${hora}:00`);
+                }
+            }, 60000); // Verificar cada minuto
+        }
+        
+        // 🤖 Bot de moderación y censura
+        function inicializarBotModeracion() {
+            moderationBot = {
+                nombre: 'ModeradorBot',
+                palabrasProhibidas: [
+                    'idiota', 'estúpido', 'tonto', 'imbécil',
+                    'odio', 'matar', 'morir', 'suicidio',
+                    'drogas', 'alcohol', 'cerveza',
+                    'sexo', 'porno', 'xxx',
+                    'hack', 'hackear', 'piratear'
+                ],
+                advertencias: new Map(),
+                accionesDisciplinarias: ['advertencia', 'silencio_temporal', 'expulsion']
+            };
+            
+            chatBots.set('moderador', moderationBot);
+            registrarAuditoria('BOT_INITIALIZED', 'Sistema', 'Bot de moderación activado');
+        }
+        
+        function censurarMensaje(usuario, mensaje) {
+            if (!moderationBot) return { censurado: false, mensajeLimpio: mensaje };
+            
+            let mensajeLimpio = mensaje;
+            let palabrasEncontradas = [];
+            
+            // Verificar palabras prohibidas
+            moderationBot.palabrasProhibidas.forEach(palabra => {
+                const regex = new RegExp(`\\b${palabra}\\b`, 'gi');
+                if (regex.test(mensajeLimpio)) {
+                    palabrasEncontradas.push(palabra);
+                    mensajeLimpio = mensajeLimpio.replace(regex, '***');
+                }
+            });
+            
+            if (palabrasEncontradas.length > 0) {
+                // Registrar advertencia
+                if (!moderationBot.advertencias.has(usuario)) {
+                    moderationBot.advertencias.set(usuario, 0);
+                }
+                
+                const advertencias = moderationBot.advertencias.get(usuario) + 1;
+                moderationBot.advertencias.set(usuario, advertencias);
+                
+                registrarAuditoria('MESSAGE_CENSORED', usuario, `Palabras censuradas: ${palabrasEncontradas.join(', ')}`);
+                
+                // Enviar advertencia privada
+                setTimeout(() => {
+                    mostrarMensajeBot(
+                        'ModeradorBot',
+                        `⚠️ ${usuario}, tu mensaje fue censurado por contener lenguaje inapropiado. Advertencias: ${advertencias}/3`,
+                        'warning'
+                    );
+                    
+                    // Acción disciplinaria si tiene muchas advertencias
+                    if (advertencias >= 3) {
+                        aplicarAccionDisciplinaria(usuario, advertencias);
+                    }
+                }, 500);
+                
+                return { censurado: true, mensajeLimpio: mensajeLimpio };
+            }
+            
+            return { censurado: false, mensajeLimpio: mensaje };
+        }
+        
+        function aplicarAccionDisciplinaria(usuario, advertencias) {
+            let accion = '';
+            
+            if (advertencias >= 5) {
+                accion = 'expulsion';
+                mostrarMensajeBot('ModeradorBot', `🚫 ${usuario} ha sido expulsado del chat por violaciones repetidas.`, 'error');
+                registrarAuditoria('USER_EXPELLED', usuario, `${advertencias} advertencias acumuladas`);
+                // En un entorno real, desconectaríamos al usuario
+            } else if (advertencias >= 4) {
+                accion = 'silencio_temporal';
+                mostrarMensajeBot('ModeradorBot', `🔇 ${usuario} ha sido silenciado temporalmente (5 minutos).`, 'warning');
+                registrarAuditoria('USER_MUTED', usuario, `Silenciado por ${advertencias} advertencias`);
+            } else {
+                accion = 'advertencia';
+                mostrarMensajeBot('ModeradorBot', `⚠️ Última advertencia para ${usuario}. Próxima violación resultará en silencio temporal.`, 'warning');
+            }
+        }
+        
+        function mostrarMensajeBot(botNombre, mensaje, tipo = 'info') {
+            const botMessage = document.createElement('div');
+            botMessage.className = 'message bot-message';
+            
+            const tipoIcon = {
+                'info': 'ℹ️',
+                'warning': '⚠️',
+                'error': '🚫',
+                'success': '✅'
+            };
+            
+            botMessage.innerHTML = `
+                <div class="message-avatar bot-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <div class="message-user-info">
+                            <strong class="message-username">${botNombre}</strong>
+                            <span class="bot-indicator">BOT</span>
+                        </div>
+                        <span class="message-time">${formatearHora(new Date())}</span>
+                    </div>
+                    <div class="message-text">${tipoIcon[tipo]} ${mensaje}</div>
+                </div>
+            `;
+            
+            document.getElementById('messages').appendChild(botMessage);
+            document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+        }
+        
+        function mostrarAlertaIntrusion(usuario, puntuacion, eventos) {
+            const alertaDiv = document.createElement('div');
+            alertaDiv.className = 'intrusion-alert';
+            alertaDiv.innerHTML = `
+                <div class="alert-header">🚨 ALERTA DE SEGURIDAD</div>
+                <div class="alert-content">
+                    <strong>Usuario:</strong> ${usuario}<br>
+                    <strong>Puntuación de riesgo:</strong> ${puntuacion}<br>
+                    <strong>Eventos sospechosos:</strong> ${eventos.length}<br>
+                    <strong>Última actividad:</strong> ${eventos[eventos.length - 1]?.accion}
+                </div>
+                <button onclick="this.parentElement.remove()">Cerrar</button>
+            `;
+            
+            document.body.appendChild(alertaDiv);
+            
+            // Auto-eliminar después de 10 segundos
+            setTimeout(() => {
+                if (alertaDiv.parentElement) {
+                    alertaDiv.remove();
+                }
+            }, 10000);
         }
 
         function mostrarMensajeEnChat(usuario, mensaje, esMio, timestamp = null, replyTo = null) {
@@ -2184,8 +2850,16 @@
         function actualizarEstadisticas() {
             // Contar todos los usuarios conectados incluyendo el usuario actual
             const totalUsuarios = connectedUsers.size + (currentUser ? 1 : 0);
-            document.getElementById('onlineCount').textContent = totalUsuarios;
-            document.getElementById('messageCount').textContent = messageCount;
+            
+            const onlineCountElement = document.getElementById('onlineCount');
+            if (onlineCountElement) {
+                onlineCountElement.textContent = totalUsuarios;
+            }
+            
+            const messageCountElement = document.getElementById('messageCount');
+            if (messageCountElement) {
+                messageCountElement.textContent = messageCount;
+            }
         }
 
         function cambiarTema(tema) {
@@ -2236,12 +2910,15 @@
             statusElement.className = `status ${tipo}`;
             
             // Actualizar estado en la sidebar
-            if (tipo === 'online') {
-                document.getElementById('userStatus').textContent = 'Conectado';
-            } else if (tipo === 'offline') {
-                document.getElementById('userStatus').textContent = 'Desconectado';
-            } else {
-                document.getElementById('userStatus').textContent = 'Conectando...';
+            const userStatusElement = document.getElementById('userStatus');
+            if (userStatusElement) {
+                if (tipo === 'online') {
+                    userStatusElement.textContent = 'Conectado';
+                } else if (tipo === 'offline') {
+                    userStatusElement.textContent = 'Desconectado';
+                } else {
+                    userStatusElement.textContent = 'Conectando...';
+                }
             }
         }
 
@@ -2291,9 +2968,13 @@
                 return fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
             } catch (error) {
                 // En caso de error, devolver hora actual
-                console.warn('Error al formatear timestamp:', timestamp, error);
+                console.error('Error al formatear tiempo:', error);
                 return new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
             }
+        }
+        
+        function formatearHora(fecha) {
+            return fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
         }
 
         function limpiarChat() {
@@ -2346,6 +3027,183 @@
             `;
             
             alert(ayuda);
+        }
+
+        // 🔐 FUNCIONES DE ADMINISTRACIÓN Y CONTROL AVANZADO
+        // =========================
+        
+        function inicializarSistemasSeguridad() {
+            // Inicializar bot de moderación
+            inicializarBotModeracion();
+            
+            // Inicializar temas dinámicos
+            inicializarTemasDinamicos();
+            
+            // Registrar inicialización
+            registrarAuditoria('SECURITY_SYSTEMS_INIT', currentUser, 'Sistemas de seguridad activados');
+            
+            // Mostrar mensaje de bienvenida de seguridad
+            setTimeout(() => {
+                mostrarMensajeBot('ModeradorBot', 
+                    '🛡️ Sistema de seguridad activado. Monitoreando chat para mantener un ambiente seguro.', 
+                    'info'
+                );
+            }, 2000);
+        }
+        
+        function mostrarPanelAdmin() {
+            if (!currentUser || !currentUser.toLowerCase().includes('admin')) {
+                mostrarNotificacion('🚫 Acceso denegado: Solo administradores', 'error');
+                registrarAuditoria('ADMIN_ACCESS_DENIED', currentUser, 'Intento de acceso no autorizado');
+                return;
+            }
+            
+            const panel = `
+🔐 PANEL DE ADMINISTRACIÓN
+
+📊 ESTADÍSTICAS DE SEGURIDAD:
+• Usuarios conectados: ${connectedUsers.size}/${securityConfig.userLimits.maxConcurrentUsers}
+• Mensajes bloqueados hoy: ${auditLogs.filter(log => log.evento.includes('SPAM') && isToday(log.timestamp)).length}
+• IPs bloqueadas: ${securityConfig.ipControl.blacklist.size}
+• Alertas de intrusión: ${auditLogs.filter(log => log.evento === 'INTRUSION_ALERT').length}
+
+🚫 ACCIONES DISPONIBLES:
+/block [usuario] - Bloquear usuario
+/unblock [usuario] - Desbloquear usuario
+/ban_ip [ip] - Bloquear IP
+/whitelist [ip] - Agregar IP a whitelist
+/mute [usuario] - Silenciar usuario
+/kick [usuario] - Expulsar usuario
+/logs - Ver audit logs
+/security - Estado de seguridad
+
+⚙️ CONFIGURACIÓN:
+• Anti-spam: ${securityConfig.antiSpam.enabled ? '✅ Activo' : '❌ Inactivo'}
+• Control IP: ${securityConfig.ipControl.enabled ? '✅ Activo' : '❌ Inactivo'}
+• Detección intrusos: ${securityConfig.intrusionDetection.enabled ? '✅ Activo' : '❌ Inactivo'}
+• Bot moderador: ${moderationBot ? '✅ Activo' : '❌ Inactivo'}
+            `;
+            
+            alert(panel);
+            registrarAuditoria('ADMIN_PANEL_ACCESS', currentUser, 'Panel de administración consultado');
+        }
+        
+        function mostrarAuditLogs() {
+            if (!currentUser || !currentUser.toLowerCase().includes('admin')) {
+                mostrarNotificacion('🚫 Acceso denegado: Solo administradores', 'error');
+                return;
+            }
+            
+            const ultimosLogs = auditLogs.slice(-20).reverse();
+            let logsText = '📊 AUDIT LOGS (Últimos 20 eventos)\n\n';
+            
+            ultimosLogs.forEach(log => {
+                const fecha = new Date(log.timestamp).toLocaleString();
+                logsText += `[${fecha}] ${log.evento}: ${log.usuario} - ${log.detalle}\n`;
+            });
+            
+            if (ultimosLogs.length === 0) {
+                logsText += 'No hay logs disponibles.';
+            }
+            
+            alert(logsText);
+            registrarAuditoria('AUDIT_LOGS_VIEW', currentUser, 'Logs de auditoría consultados');
+        }
+        
+        function mostrarEstadoSeguridad() {
+            const amenazasDetectadas = auditLogs.filter(log => 
+                ['SPAM_DETECTED', 'INTRUSION_ALERT', 'IP_BLOCKED', 'MESSAGE_CENSORED'].includes(log.evento)
+            ).length;
+            
+            const usuariosSospechosos = suspiciousActivity.size;
+            const mensajesCensurados = auditLogs.filter(log => log.evento === 'MESSAGE_CENSORED').length;
+            
+            const estado = `
+🛡️ ESTADO DE SEGURIDAD
+
+📈 MÉTRICAS EN TIEMPO REAL:
+• Amenazas detectadas: ${amenazasDetectadas}
+• Usuarios bajo vigilancia: ${usuariosSospechosos}
+• Mensajes censurados: ${mensajesCensurados}
+• Conexiones activas: ${connectedUsers.size}
+
+🔍 ACTIVIDAD RECIENTE:
+${auditLogs.slice(-5).map(log => 
+    `• ${log.evento}: ${log.usuario} - ${new Date(log.timestamp).toLocaleTimeString()}`
+).join('\n')}
+
+⚙️ SISTEMAS ACTIVOS:
+• Anti-spam ML: ${securityConfig.antiSpam.enabled ? '🟢' : '🔴'}
+• Control de IP: ${securityConfig.ipControl.enabled ? '🟢' : '🔴'}
+• Detección intrusos: ${securityConfig.intrusionDetection.enabled ? '🟢' : '🔴'}
+• Bot moderador: ${moderationBot ? '🟢' : '🔴'}
+• Temas dinámicos: ${themeScheduler ? '🟢' : '🔴'}
+            `;
+            
+            alert(estado);
+            registrarAuditoria('SECURITY_STATUS_VIEW', currentUser, 'Estado de seguridad consultado');
+        }
+        
+        function procesarComandoAdmin(comando, parametros) {
+            if (!currentUser || !currentUser.toLowerCase().includes('admin')) {
+                mostrarNotificacion('🚫 Comando de administrador requerido', 'error');
+                return false;
+            }
+            
+            switch(comando.toLowerCase()) {
+                case '/admin':
+                    mostrarPanelAdmin();
+                    return true;
+                    
+                case '/logs':
+                    mostrarAuditLogs();
+                    return true;
+                    
+                case '/security':
+                    mostrarEstadoSeguridad();
+                    return true;
+                    
+                case '/block':
+                    if (parametros[0]) {
+                        blockedUsers.add(parametros[0]);
+                        mostrarNotificacion(`🚫 Usuario ${parametros[0]} bloqueado`, 'success');
+                        registrarAuditoria('USER_BLOCKED', currentUser, `Usuario bloqueado: ${parametros[0]}`);
+                    }
+                    return true;
+                    
+                case '/unblock':
+                    if (parametros[0]) {
+                        blockedUsers.delete(parametros[0]);
+                        mostrarNotificacion(`✅ Usuario ${parametros[0]} desbloqueado`, 'success');
+                        registrarAuditoria('USER_UNBLOCKED', currentUser, `Usuario desbloqueado: ${parametros[0]}`);
+                    }
+                    return true;
+                    
+                case '/ban_ip':
+                    if (parametros[0]) {
+                        securityConfig.ipControl.blacklist.add(parametros[0]);
+                        mostrarNotificacion(`🚫 IP ${parametros[0]} bloqueada`, 'success');
+                        registrarAuditoria('IP_BANNED', currentUser, `IP bloqueada: ${parametros[0]}`);
+                    }
+                    return true;
+                    
+                case '/whitelist':
+                    if (parametros[0]) {
+                        securityConfig.ipControl.whitelist.add(parametros[0]);
+                        mostrarNotificacion(`✅ IP ${parametros[0]} agregada a whitelist`, 'success');
+                        registrarAuditoria('IP_WHITELISTED', currentUser, `IP en whitelist: ${parametros[0]}`);
+                    }
+                    return true;
+                    
+                default:
+                    return false;
+            }
+        }
+        
+        function isToday(timestamp) {
+            const today = new Date();
+            const date = new Date(timestamp);
+            return date.toDateString() === today.toDateString();
         }
 
         function mostrarEmojis() {
@@ -3168,7 +4026,20 @@
         function procesarComandoBot(mensaje) {
             if (!mensaje.startsWith('/')) return false;
             
-            const comando = mensaje.toLowerCase();
+            const partes = mensaje.split(' ');
+            const comando = partes[0].toLowerCase();
+            const parametros = partes.slice(1);
+            
+            // 🔐 Comandos de administración y seguridad
+            if (procesarComandoAdmin(comando, parametros)) {
+                return true;
+            }
+            
+            // Comandos de seguridad para todos los usuarios
+            if (comando === '/security') {
+                mostrarEstadoSeguridad();
+                return true;
+            }
             
             // Bot de bienvenida
             if (comando === '/welcome') {
@@ -3177,7 +4048,37 @@
             }
             
             if (comando === '/info') {
-                enviarMensajeBot('WelcomeBot', `📊 Información del chat:\n• Usuarios conectados: ${connectedUsers.size + 1}\n• Mensajes enviados: ${messageCount}\n• Canal actual: ${currentChannel}`);
+                enviarMensajeBot('WelcomeBot', `📊 Información del chat:\n• Usuarios conectados: ${connectedUsers.size + 1}\n• Mensajes enviados: ${messageCount}\n• Canal actual: ${currentChannel}\n• Sistema anti-spam: ${securityConfig.antiSpam.enabled ? 'Activo' : 'Inactivo'}\n• Bot moderador: ${moderationBot ? 'Activo' : 'Inactivo'}`);
+                return true;
+            }
+            
+            // Comando de ayuda con comandos de seguridad
+            if (comando === '/help' || comando === '/comandos') {
+                const ayudaComandos = `
+🤖 COMANDOS DISPONIBLES:
+
+👋 BÁSICOS:
+• /welcome - Mensaje de bienvenida
+• /info - Información del chat
+• /joke - Chiste aleatorio
+• /fact - Dato curioso
+• /quote - Cita inspiradora
+• /security - Estado de seguridad
+
+🛡️ SEGURIDAD (Solo admins):
+• /admin - Panel de administración
+• /logs - Ver audit logs
+• /block [usuario] - Bloquear usuario
+• /unblock [usuario] - Desbloquear usuario
+• /ban_ip [ip] - Bloquear IP
+• /whitelist [ip] - Agregar a whitelist
+
+⚙️ CONFIGURACIÓN:
+• /clear - Limpiar chat
+• Usa el botón 🔍 para buscar mensajes
+• Reacciona con emojis haciendo hover en mensajes
+                `;
+                enviarMensajeBot('HelpBot', ayudaComandos);
                 return true;
             }
             
@@ -3186,7 +4087,9 @@
                 const jokes = [
                     '¿Por qué los programadores prefieren el modo oscuro? ¡Porque la luz atrae bugs! 🐛',
                     '¿Cuántos programadores necesitas para cambiar una bombilla? Ninguno, eso es un problema de hardware. 💡',
-                    '¿Por qué los desarrolladores usan Mac? Porque no pueden permitirse Windows. 💻'
+                    '¿Por qué los desarrolladores usan Mac? Porque no pueden permitirse Windows. 💻',
+                    '¿Cuál es el animal favorito de los programadores? El Python. 🐍',
+                    '¿Por qué los hackers nunca se aburren? Porque siempre tienen algo que romper. 🔓'
                 ];
                 const joke = jokes[Math.floor(Math.random() * jokes.length)];
                 enviarMensajeBot('FunBot', joke);
@@ -3197,7 +4100,9 @@
                 const facts = [
                     '🧠 El primer bug de computadora fue literalmente un insecto encontrado en 1947.',
                     '⌨️ El teclado QWERTY fue diseñado para ralentizar la escritura.',
-                    '🌐 El primer sitio web sigue activo: http://info.cern.ch/hypertext/WWW/TheProject.html'
+                    '🌐 El primer sitio web sigue activo: http://info.cern.ch/hypertext/WWW/TheProject.html',
+                    '💾 El primer virus informático se llamaba "Creeper" en 1971.',
+                    '🔐 La contraseña más común del mundo es "123456".'
                 ];
                 const fact = facts[Math.floor(Math.random() * facts.length)];
                 enviarMensajeBot('FunBot', fact);
@@ -3208,7 +4113,9 @@
                 const quotes = [
                     '"El mejor código es el que no necesitas escribir." - Jeff Atwood',
                     '"Habla es barato. Muéstrame el código." - Linus Torvalds',
-                    '"El software es como el sexo: es mejor cuando es gratis." - Linus Torvalds'
+                    '"El software es como el sexo: es mejor cuando es gratis." - Linus Torvalds',
+                    '"Cualquier tonto puede escribir código que una computadora entienda. Los buenos programadores escriben código que los humanos pueden entender." - Martin Fowler',
+                    '"La seguridad no es un producto, sino un proceso." - Bruce Schneier'
                 ];
                 const quote = quotes[Math.floor(Math.random() * quotes.length)];
                 enviarMensajeBot('FunBot', quote);
@@ -3216,7 +4123,7 @@
             }
             
             // Comando no reconocido
-            enviarMensajeBot('WelcomeBot', `❓ Comando "${comando}" no reconocido. Usa /info para ver comandos disponibles.`);
+            enviarMensajeBot('HelpBot', `❓ Comando "${comando}" no reconocido. Usa /help para ver todos los comandos disponibles.`);
             return true;
         }
 
@@ -3328,6 +4235,35 @@
                     usuario: currentUser
                 });
             }
+        });
+
+        // 🔐 INICIALIZACIÓN DEL SISTEMA DE SEGURIDAD
+        // =========================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🛡️ Inicializando sistema de seguridad avanzado...');
+            
+            // Actualizar indicador de seguridad cada 30 segundos
+            setInterval(() => {
+                const indicator = document.getElementById('securityIndicator');
+                if (indicator) {
+                    const amenazas = auditLogs.filter(log => 
+                        ['SPAM_DETECTED', 'INTRUSION_ALERT', 'IP_BLOCKED'].includes(log.evento)
+                    ).length;
+                    
+                    if (amenazas > 10) {
+                        indicator.className = 'security-indicator danger';
+                        indicator.textContent = '🚨 Amenazas detectadas';
+                    } else if (amenazas > 5) {
+                        indicator.className = 'security-indicator warning';
+                        indicator.textContent = '⚠️ Vigilancia activa';
+                    } else {
+                        indicator.className = 'security-indicator';
+                        indicator.textContent = '🛡️ Seguridad activa';
+                    }
+                }
+            }, 30000);
+            
+            console.log('✅ Sistema de seguridad listo');
         });
     </script>
 </body>
