@@ -240,18 +240,9 @@
         // Configuración del servidor
         const WS_URL = window.location.hostname === 'localhost' 
             ? 'ws://localhost:8765' 
-            : null; // Sin servidor en GitHub Pages - modo demo
+            : 'wss://web-production-4b88.up.railway.app'; // Servidor Railway activo
 
         function conectarWebSocket() {
-            // Modo demo para GitHub Pages
-            if (!WS_URL) {
-                console.log('🎭 Modo demo - GitHub Pages (sin servidor backend)');
-                document.getElementById('status').textContent = 'Modo Demo';
-                document.getElementById('status').className = 'status demo';
-                mostrarMensajeDemo();
-                return;
-            }
-            
             try {
                 ws = new WebSocket(WS_URL);
                 
@@ -347,12 +338,6 @@
             const username = 'Invitado_' + Math.random().toString(36).substr(2, 5);
             currentUser = username;
             
-            if (!WS_URL) {
-                // Modo demo - simular login exitoso
-                mostrarMensajeDemo();
-                return;
-            }
-            
             enviarAlServidor({
                 tipo: 'invitado',
                 usuario: username
@@ -364,26 +349,6 @@
             const mensaje = input.value.trim();
             
             if (!mensaje) return;
-            
-            if (!WS_URL) {
-                // Modo demo - mostrar mensaje localmente
-                mostrarMensajeEnChat(currentUser, mensaje, true);
-                input.value = '';
-                
-                // Simular respuesta automática
-                setTimeout(() => {
-                    const respuestas = [
-                        'Echo: ' + mensaje,
-                        '¡Interesante punto de vista!',
-                        '🤖 Mensaje recibido en modo demo',
-                        '✨ ¡Funciona perfectamente!',
-                        '📱 La interfaz se ve genial ¿verdad?'
-                    ];
-                    const respuesta = respuestas[Math.floor(Math.random() * respuestas.length)];
-                    mostrarMensajeEnChat('Demo Bot', respuesta, false);
-                }, 1000);
-                return;
-            }
             
             enviarAlServidor({
                 tipo: 'mensaje',
