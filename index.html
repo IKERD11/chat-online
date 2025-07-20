@@ -1057,6 +1057,9 @@
             // Para modo invitado, mostrar chat inmediatamente
             mostrarChat();
             mostrarMensajeSistema(`¡Bienvenido al chat, ${apodo}! Te has conectado como invitado en la sala "${sala}".`);
+            
+            // Actualizar estadísticas inmediatamente
+            actualizarEstadisticas();
         }
 
         // =========================
@@ -1116,12 +1119,14 @@
                 case 'login_exitoso':
                     mostrarChat();
                     mostrarMensajeSistema(`¡Bienvenido de vuelta, ${currentUser}!`);
+                    actualizarEstadisticas();
                     break;
                     
                 case 'registro_exitoso':
                     mostrarNotificacion('¡Registro exitoso! Bienvenido al chat', 'success');
                     mostrarChat();
                     mostrarMensajeSistema(`¡Bienvenido por primera vez, ${currentUser}!`);
+                    actualizarEstadisticas();
                     break;
                     
                 case 'error':
@@ -1258,6 +1263,9 @@
             document.getElementById('loginContainer').classList.add('hidden');
             document.getElementById('chatContainer').classList.remove('hidden');
             
+            // Actualizar la lista de usuarios y estadísticas
+            actualizarListaUsuarios();
+            
             // Enfocar en el input de mensajes
             setTimeout(() => {
                 document.getElementById('messageInput').focus();
@@ -1317,7 +1325,9 @@
         }
 
         function actualizarEstadisticas() {
-            document.getElementById('onlineCount').textContent = connectedUsers.size;
+            // Contar todos los usuarios conectados incluyendo el usuario actual
+            const totalUsuarios = connectedUsers.size + (currentUser ? 1 : 0);
+            document.getElementById('onlineCount').textContent = totalUsuarios;
             document.getElementById('messageCount').textContent = messageCount;
         }
 
