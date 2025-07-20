@@ -1207,7 +1207,9 @@
                 
                 const timeSpan = document.createElement('div');
                 timeSpan.className = 'message-time';
-                timeSpan.textContent = formatearTiempo(timestamp);
+                // Asegurar que el timestamp sea válido antes de formatearlo
+                const timeText = formatearTiempo(timestamp || new Date().toISOString());
+                timeSpan.textContent = timeText;
                 
                 userInfoDiv.appendChild(usernameSpan);
                 userInfoDiv.appendChild(roleSpan);
@@ -1417,10 +1419,26 @@
         }
 
         function formatearTiempo(timestamp) {
-            if (!timestamp) return new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            // Si no hay timestamp, devolver hora actual
+            if (!timestamp) {
+                return new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            }
             
-            const fecha = new Date(timestamp);
-            return fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            try {
+                const fecha = new Date(timestamp);
+                
+                // Verificar si la fecha es válida
+                if (isNaN(fecha.getTime())) {
+                    // Si el timestamp es inválido, devolver hora actual
+                    return new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                }
+                
+                return fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            } catch (error) {
+                // En caso de error, devolver hora actual
+                console.warn('Error al formatear timestamp:', timestamp, error);
+                return new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            }
         }
 
         function limpiarChat() {
