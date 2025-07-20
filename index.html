@@ -147,17 +147,46 @@
             background: var(--success-color);
             margin-right: 8px;
             animation: pulse 2s infinite;
+            flex-shrink: 0;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .user-role {
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+            margin-bottom: 1px;
+        }
+
+        .user-label {
+            font-size: 9px;
+            color: var(--text-secondary);
+            font-style: italic;
+            opacity: 0.7;
         }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(0, 184, 148, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(0, 184, 148, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 184, 148, 0); }
-        }
-
-        .user-name {
-            font-size: 13px;
-            font-weight: 500;
         }
 
         .stats-section {
@@ -360,19 +389,36 @@
         .message-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 5px;
+        }
+
+        .message-user-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .message-username {
             font-weight: bold;
             font-size: 12px;
-            opacity: 0.8;
+            opacity: 0.9;
+            margin-bottom: 1px;
+        }
+
+        .message-user-role {
+            font-size: 9px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
         }
 
         .message-time {
             font-size: 10px;
             opacity: 0.6;
+            flex-shrink: 0;
+            margin-left: 8px;
         }
 
         .message-text {
@@ -1115,6 +1161,19 @@
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${esMio ? 'sent' : 'received'}`;
             
+            // Función para obtener rol del usuario
+            function obtenerRolUsuario(username) {
+                if (username.toLowerCase().includes('admin') || username === 'IKERD11') {
+                    return { rol: 'Admin', color: '#e74c3c' };
+                } else if (username.toLowerCase().includes('mod') || username.toLowerCase().includes('moderador')) {
+                    return { rol: 'Moderador', color: '#f39c12' };
+                } else if (username.toLowerCase().includes('guest') || username.toLowerCase().includes('invitado')) {
+                    return { rol: 'Invitado', color: '#95a5a6' };
+                } else {
+                    return { rol: 'Usuario', color: '#3498db' };
+                }
+            }
+            
             // Crear avatar con inicial del usuario
             const avatarDiv = document.createElement('div');
             avatarDiv.className = 'message-avatar';
@@ -1128,15 +1187,26 @@
                 const headerDiv = document.createElement('div');
                 headerDiv.className = 'message-header';
                 
+                const userInfoDiv = document.createElement('div');
+                userInfoDiv.className = 'message-user-info';
+                
                 const usernameSpan = document.createElement('div');
                 usernameSpan.className = 'message-username';
                 usernameSpan.textContent = usuario;
+                
+                const userRole = obtenerRolUsuario(usuario);
+                const roleSpan = document.createElement('div');
+                roleSpan.className = 'message-user-role';
+                roleSpan.style.color = userRole.color;
+                roleSpan.textContent = userRole.rol;
                 
                 const timeSpan = document.createElement('div');
                 timeSpan.className = 'message-time';
                 timeSpan.textContent = formatearTiempo(timestamp);
                 
-                headerDiv.appendChild(usernameSpan);
+                userInfoDiv.appendChild(usernameSpan);
+                userInfoDiv.appendChild(roleSpan);
+                headerDiv.appendChild(userInfoDiv);
                 headerDiv.appendChild(timeSpan);
                 contentDiv.appendChild(headerDiv);
             }
@@ -1198,12 +1268,31 @@
             const usersList = document.getElementById('usersList');
             usersList.innerHTML = '';
             
+            // Función para obtener rol del usuario
+            function obtenerRolUsuario(username) {
+                // Determinar rol basado en el nombre de usuario o lógica personalizada
+                if (username.toLowerCase().includes('admin') || username === 'IKERD11') {
+                    return { rol: 'Admin', color: '#e74c3c' };
+                } else if (username.toLowerCase().includes('mod') || username.toLowerCase().includes('moderador')) {
+                    return { rol: 'Moderador', color: '#f39c12' };
+                } else if (username.toLowerCase().includes('guest') || username.toLowerCase().includes('invitado')) {
+                    return { rol: 'Invitado', color: '#95a5a6' };
+                } else {
+                    return { rol: 'Usuario', color: '#3498db' };
+                }
+            }
+            
             // Agregar usuario actual primero
             const currentUserItem = document.createElement('div');
             currentUserItem.className = 'user-item';
+            const currentUserRole = obtenerRolUsuario(currentUser);
             currentUserItem.innerHTML = `
                 <div class="user-status"></div>
-                <div class="user-name">${currentUser} (Tú)</div>
+                <div class="user-info">
+                    <div class="user-name">${currentUser}</div>
+                    <div class="user-role" style="color: ${currentUserRole.color}">${currentUserRole.rol}</div>
+                    <div class="user-label">(Tú)</div>
+                </div>
             `;
             usersList.appendChild(currentUserItem);
             
@@ -1212,9 +1301,13 @@
                 if (username !== currentUser) {
                     const userItem = document.createElement('div');
                     userItem.className = 'user-item';
+                    const userRole = obtenerRolUsuario(username);
                     userItem.innerHTML = `
                         <div class="user-status"></div>
-                        <div class="user-name">${username}</div>
+                        <div class="user-info">
+                            <div class="user-name">${username}</div>
+                            <div class="user-role" style="color: ${userRole.color}">${userRole.rol}</div>
+                        </div>
                     `;
                     usersList.appendChild(userItem);
                 }
