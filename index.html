@@ -204,6 +204,66 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Nuevo selector de temas en el header */
+        .theme-selector-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .theme-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+            margin-right: 5px;
+        }
+
+        .theme-btn-header {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-btn-header:hover {
+            transform: scale(1.15);
+            border-color: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        .theme-btn-header.active {
+            transform: scale(1.2);
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .theme-btn-header:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .theme-btn-header:hover:before {
+            width: 100%;
+            height: 100%;
         }
 
         .control-btn {
@@ -648,14 +708,6 @@
                 <div class="user-info">
                     <span id="currentUserDisplay">Usuario</span>
                 </div>
-                
-                <div class="theme-selector">
-                    <button class="theme-btn theme-claro active" onclick="cambiarTema('claro')" title="Tema Claro"></button>
-                    <button class="theme-btn theme-oscuro" onclick="cambiarTema('oscuro')" title="Tema Oscuro"></button>
-                    <button class="theme-btn theme-gris" onclick="cambiarTema('gris')" title="Tema Gris"></button>
-                    <button class="theme-btn theme-rosado" onclick="cambiarTema('rosado')" title="Tema Rosado"></button>
-                    <button class="theme-btn theme-verde" onclick="cambiarTema('verde')" title="Tema Verde"></button>
-                </div>
             </div>
             
             <div class="users-section">
@@ -691,6 +743,17 @@
                 </div>
                 
                 <div class="header-controls">
+                    <!-- Selector de Temas -->
+                    <div class="theme-selector-header">
+                        <span class="theme-label">🎨 Temas:</span>
+                        <button class="theme-btn-header theme-claro active" onclick="cambiarTema('claro')" title="Tema Claro"></button>
+                        <button class="theme-btn-header theme-oscuro" onclick="cambiarTema('oscuro')" title="Tema Oscuro"></button>
+                        <button class="theme-btn-header theme-gris" onclick="cambiarTema('gris')" title="Tema Gris"></button>
+                        <button class="theme-btn-header theme-rosado" onclick="cambiarTema('rosado')" title="Tema Rosado"></button>
+                        <button class="theme-btn-header theme-verde" onclick="cambiarTema('verde')" title="Tema Verde"></button>
+                    </div>
+                    
+                    <!-- Controles Existentes -->
                     <button class="control-btn" onclick="limpiarChat()">🗑️ Limpiar</button>
                     <button class="control-btn" onclick="mostrarAyuda()">❓ Ayuda</button>
                     <button class="control-btn" onclick="desconectar()">🚪 Salir</button>
@@ -1084,11 +1147,14 @@
         }
 
         function cambiarTema(tema) {
-            // Remover clase active de todos los botones
-            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            // Remover clase active de todos los botones (tanto antiguos como nuevos)
+            document.querySelectorAll('.theme-btn, .theme-btn-header').forEach(btn => btn.classList.remove('active'));
             
-            // Agregar clase active al botón seleccionado
-            document.querySelector(`.theme-${tema}`).classList.add('active');
+            // Agregar clase active al botón seleccionado (buscar en ambas clases)
+            const botonTema = document.querySelector(`.theme-${tema}`) || document.querySelector(`.theme-btn-header.theme-${tema}`);
+            if (botonTema) {
+                botonTema.classList.add('active');
+            }
             
             const root = document.documentElement;
             currentTheme = tema;
