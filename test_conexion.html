@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test WebSocket Conexión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .log {
+            background: #000;
+            color: #0f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .connect { background: #4CAF50; color: white; }
+        .disconnect { background: #f44336; color: white; }
+        .send { background: #2196F3; color: white; }
+        input { padding: 10px; margin: 10px; width: 300px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Test WebSocket Conexión</h1>
+    
+    <div>
+        <button class="connect" onclick="conectar()">🔌 Conectar</button>
+        <button class="disconnect" onclick="desconectar()">❌ Desconectar</button>
+    </div>
+    
+    <div>
+        <input type="text" id="mensaje" placeholder="Escribe un mensaje..." />
+        <button class="send" onclick="enviarMensaje()">📤 Enviar</button>
+    </div>
+    
+    <div class="log" id="log"></div>
+
+    <script>
+        let ws = null;
+        const log = document.getElementById('log');
+        
+        // URLs a probar
+        const urls = [
+            'wss://web-production-4b88.up.railway.app',
+            'ws://web-production-4b88.up.railway.app:80',
+            'ws://web-production-4b88.up.railway.app'
+        ];
+        
+        function addLog(mensaje) {
+            const timestamp = new Date().toLocaleTimeString();
+            log.textContent += `[${timestamp}] ${mensaje}\n`;
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        function conectar() {
+            if (ws) {
+                addLog('❌ Ya hay una conexión activa');
+                return;
+            }
+            
+            // Probar la primera URL
+            const url = urls[0];
+            addLog(`🔄 Intentando conectar a: ${url}`);
+            
+            try {
+                ws = new WebSocket(url);
+                
+                ws.onopen = function(event) {
+                    addLog('✅ ¡Conexión exitosa!');
+                    addLog('📡 WebSocket abierto y listo');
+                };
+                
+                ws.onmessage = function(event) {
+                    addLog(`📨 Mensaje recibido: ${event.data}`);
+                };
+                
+                ws.onclose = function(event) {
+                    addLog(`🔌 Conexión cerrada - Código: ${event.code}, Razón: ${event.reason}`);
+                    ws = null;
+                };
+                
+                ws.onerror = function(error) {
+                    addLog(`❌ Error de WebSocket: ${error}`);
+                    addLog('🔄 Probando siguiente URL...');
+                    
+                    // Probar siguiente URL
+                    setTimeout(() => {
+                        if (urls.length > 1) {
+                            const nextUrl = urls[1];
+                            addLog(`🔄 Intentando: ${nextUrl}`);
+                            // Aquí podrías implementar el fallback
+                        }
+                    }, 1000);
+                };
+                
+            } catch (error) {
+                addLog(`❌ Error al crear WebSocket: ${error}`);
+            }
+        }
+        
+        function desconectar() {
+            if (ws) {
+                ws.close();
+                addLog('🔌 Desconectando...');
+            } else {
+                addLog('❌ No hay conexión activa');
+            }
+        }
+        
+        function enviarMensaje() {
+            const input = document.getElementById('mensaje');
+            const mensaje = input.value.trim();
+            
+            if (!mensaje) {
+                addLog('❌ Escribe un mensaje primero');
+                return;
+            }
+            
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                addLog('❌ No hay conexión activa');
+                return;
+            }
+            
+            const data = {
+                tipo: 'mensaje',
+                usuario: 'TestUser',
+                mensaje: mensaje,
+                sala: 'General'
+            };
+            
+            try {
+                ws.send(JSON.stringify(data));
+                addLog(`📤 Enviado: ${mensaje}`);
+                input.value = '';
+            } catch (error) {
+                addLog(`❌ Error enviando: ${error}`);
+            }
+        }
+        
+        // Auto-conectar al cargar
+        window.onload = function() {
+            addLog('🚀 Test de conexión WebSocket iniciado');
+            addLog('📋 URLs a probar:');
+            urls.forEach((url, i) => addLog(`  ${i+1}. ${url}`));
+            addLog('');
+        };
+    </script>
+</body>
+</html>
