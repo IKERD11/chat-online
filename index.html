@@ -1411,16 +1411,6 @@
             
             // Configurar tema por defecto
             cambiarTema('claro');
-            
-            // Agregar algunos usuarios demo para mostrar la interfaz
-            setTimeout(() => {
-                if (connectedUsers.size === 0) {
-                    // Simular algunos usuarios para demostración
-                    connectedUsers.add('Demo_Usuario1');
-                    connectedUsers.add('Demo_Usuario2');
-                    actualizarListaUsuarios();
-                }
-            }, 2000);
         };
 
         // Manejar cierre de ventana
