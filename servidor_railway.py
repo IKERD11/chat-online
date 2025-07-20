@@ -17,7 +17,7 @@ class ServidorWebSocketSimple:
         self.host = "0.0.0.0"
         self.puerto = PORT
 
-    async def manejar_conexion(self, websocket, path):
+    async def manejar_conexion(self, websocket, path=None):
         """Manejar nueva conexión WebSocket"""
         conexiones_activas.add(websocket)
         print(f"✅ Nueva conexión. Total: {len(conexiones_activas)}")
@@ -175,28 +175,47 @@ class ServidorWebSocketSimple:
     async def iniciar_servidor(self):
         """Iniciar el servidor WebSocket"""
         print(f"🚀 Iniciando servidor WebSocket en puerto {self.puerto}")
-        print(f"🌐 Servidor accesible en: ws://localhost:{self.puerto}")
+        print(f"🌐 Servidor accesible en: ws://0.0.0.0:{self.puerto}")
         
         try:
+            # Configuración más compatible para Railway
             servidor = await websockets.serve(
                 self.manejar_conexion,
                 self.host,
                 self.puerto,
-                ping_interval=30,
-                ping_timeout=10
+                ping_interval=20,
+                ping_timeout=10,
+                close_timeout=10
             )
             
             print(f"✅ Servidor WebSocket iniciado correctamente")
             print(f"📡 Esperando conexiones...")
             
+            # Mantener el servidor corriendo
             await servidor.wait_closed()
             
         except Exception as e:
             print(f"❌ Error al iniciar servidor: {e}")
+            # Intentar con configuración alternativa
+            try:
+                print("🔄 Reintentando con configuración simplificada...")
+                servidor = await websockets.serve(
+                    self.manejar_conexion,
+                    self.host,
+                    self.puerto
+                )
+                print(f"✅ Servidor iniciado en modo simplificado")
+                await servidor.wait_closed()
+            except Exception as e2:
+                print(f"❌ Error fatal: {e2}")
 
 if __name__ == "__main__":
     print("🎯 Iniciando Chat Online - Servidor WebSocket Simple")
     print(f"🔧 Puerto configurado: {PORT}")
+    print(f"🌍 Host configurado: 0.0.0.0")
+    print(f"📊 Variables de entorno disponibles:")
+    print(f"   - PORT: {os.environ.get('PORT', 'No definido')}")
+    print(f"   - HOST: {os.environ.get('HOST', 'No definido')}")
     
     servidor = ServidorWebSocketSimple()
     
@@ -206,3 +225,5 @@ if __name__ == "__main__":
         print("\n🛑 Servidor detenido por el usuario")
     except Exception as e:
         print(f"\n❌ Error fatal: {e}")
+        import traceback
+        traceback.print_exc()
