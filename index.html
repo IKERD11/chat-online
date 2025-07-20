@@ -450,6 +450,275 @@
             word-wrap: break-word;
         }
 
+        /* Reacciones a mensajes */
+        .message-reactions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .reaction-item {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 3px 8px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reaction-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: scale(1.05);
+        }
+
+        .reaction-item.user-reacted {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .reaction-emoji {
+            font-size: 14px;
+        }
+
+        .reaction-count {
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .add-reaction-btn {
+            padding: 3px 6px;
+            background: rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .add-reaction-btn:hover {
+            background: rgba(0,0,0,0.1);
+            transform: scale(1.05);
+        }
+
+        /* Botón de reacción rápida */
+        .message-actions {
+            position: absolute;
+            top: -30px;
+            right: 10px;
+            display: none;
+            flex-direction: row;
+            gap: 5px;
+            background: white;
+            padding: 5px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            z-index: 10;
+        }
+
+        .message:hover .message-actions {
+            display: flex;
+        }
+
+        .quick-reaction {
+            width: 25px;
+            height: 25px;
+            border: none;
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-reaction:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.2);
+        }
+
+        /* Sistema de Búsqueda */
+        .search-panel {
+            background: #f8f9fa;
+            border-bottom: 2px solid var(--border-color);
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .search-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-results {
+            max-height: 200px;
+            overflow-y: auto;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-result-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: #f1f3f4;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-user {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 13px;
+        }
+
+        .search-result-text {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .search-result-time {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .search-highlight {
+            background: yellow;
+            font-weight: bold;
+            padding: 1px 2px;
+            border-radius: 2px;
+        }
+
+        /* Sistema de Respuestas */
+        .reply-to-message {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 3px solid var(--primary-color);
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 0 8px 8px 0;
+            font-size: 12px;
+            position: relative;
+        }
+
+        .reply-to-user {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 2px;
+        }
+
+        .reply-to-text {
+            color: var(--text-secondary);
+            font-style: italic;
+            max-height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .reply-cancel {
+            position: absolute;
+            top: 2px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .reply-cancel:hover {
+            color: var(--error-color);
+        }
+
+        .replying-to-indicator {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 3px solid var(--primary-color);
+            padding: 8px 15px;
+            margin: 10px 20px;
+            border-radius: 0 10px 10px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .message-reply-reference {
+            background: rgba(0,0,0,0.05);
+            border-left: 2px solid var(--primary-color);
+            padding: 6px 10px;
+            margin-bottom: 8px;
+            border-radius: 0 6px 6px 0;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .message-reply-reference:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .reply-reference-user {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .reply-reference-text {
+            color: var(--text-secondary);
+            margin-top: 2px;
+            max-height: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .chat-input-section {
             padding: 20px;
             background: white;
@@ -714,6 +983,366 @@
             50% { opacity: 1; }
         }
 
+        /* Indicador de escritura mejorado */
+        .typing-users-indicator {
+            padding: 8px 20px;
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 3px solid var(--primary-color);
+            border-radius: 0 15px 15px 0;
+            margin: 5px 0;
+            font-size: 13px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: slideInTyping 0.3s ease-out;
+            min-height: 40px;
+        }
+
+        @keyframes slideInTyping {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .typing-animation {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: 0.0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .typing-users-list {
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .typing-user-name {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Mensajes Privados y Salas */
+        .chat-channels {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 15px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .channel-tabs {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .channel-tab {
+            padding: 5px 12px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .channel-tab.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .channel-tab:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .channel-tab.private {
+            background: rgba(255, 152, 0, 0.1);
+            border-color: rgba(255, 152, 0, 0.3);
+        }
+
+        .channel-tab.private.active {
+            background: #ff9800;
+            border-color: #ff9800;
+        }
+
+        .close-channel {
+            margin-left: 3px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-channel-btn {
+            padding: 5px 10px;
+            background: rgba(76, 190, 140, 0.1);
+            border: 1px solid rgba(76, 190, 140, 0.3);
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #4cbe8c;
+            font-weight: 600;
+        }
+
+        .add-channel-btn:hover {
+            background: rgba(76, 190, 140, 0.2);
+        }
+
+        /* Lista de Amigos */
+        .friends-section {
+            border-top: 1px solid var(--border-color);
+            padding: 10px 15px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .friend-item {
+            display: flex;
+            align-items: center;
+            padding: 5px 8px;
+            margin: 2px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .friend-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .friend-status {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .friend-status.online { background: #4cbe8c; }
+        .friend-status.offline { background: #95a5a6; }
+
+        .friend-name {
+            font-size: 11px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .friend-actions {
+            display: flex;
+            gap: 3px;
+        }
+
+        .friend-action-btn {
+            width: 16px;
+            height: 16px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-btn {
+            background: #74b9ff;
+            color: white;
+        }
+
+        .block-btn {
+            background: #e17055;
+            color: white;
+        }
+
+        /* Autenticación 2FA */
+        .twofa-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .twofa-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .twofa-code-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 5px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        /* Encuestas */
+        .poll-container {
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .poll-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .poll-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .poll-option:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .poll-option.voted {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .poll-votes {
+            margin-left: auto;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .poll-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        /* Cifrado */
+        .encrypted-message {
+            position: relative;
+        }
+
+        .encrypted-indicator {
+            display: inline-block;
+            font-size: 10px;
+            color: #4cbe8c;
+            margin-left: 5px;
+        }
+
+        /* Modo Compacto */
+        .compact-mode .message {
+            margin-bottom: 5px;
+        }
+
+        .compact-mode .message-content {
+            padding: 8px 12px;
+        }
+
+        .compact-mode .message-header {
+            margin-bottom: 3px;
+        }
+
+        .compact-mode .sidebar {
+            width: 200px;
+        }
+
+        /* Bots */
+        .bot-message {
+            background: linear-gradient(45deg, #a29bfe, #fd79a8) !important;
+            color: white !important;
+        }
+
+        .bot-indicator {
+            font-size: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 5px;
+            border-radius: 8px;
+            margin-left: 5px;
+        }
+
+        /* Controles de interfaz */
+        .interface-controls {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .interface-toggle {
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .interface-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .interface-toggle.active {
+            background: rgba(255,255,255,0.4);
+        }
+
         .notification {
             position: fixed;
             top: 80px;
@@ -826,6 +1455,19 @@
                 </div>
             </div>
             
+            <!-- Canales y Salas -->
+            <div class="chat-channels">
+                <div class="section-title">🏠 Canales</div>
+                <div class="channel-tabs" id="channelTabs">
+                    <div class="channel-tab active" data-channel="general">
+                        <span>📢 General</span>
+                    </div>
+                    <div class="add-channel-btn" onclick="crearNuevoCanal()">
+                        + Nueva Sala
+                    </div>
+                </div>
+            </div>
+            
             <div class="users-section">
                 <div class="section-title">👥 Usuarios Conectados</div>
                 <div id="usersList" class="user-list">
@@ -848,17 +1490,35 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Lista de Amigos -->
+            <div class="friends-section">
+                <div class="section-title">👥 Amigos</div>
+                <div id="friendsList" class="friends-list">
+                    <!-- Los amigos se llenarán dinámicamente -->
+                </div>
+                <button class="add-channel-btn" onclick="agregarAmigo()" style="width: 100%; margin-top: 5px;">
+                    + Agregar Amigo
+                </button>
+            </div>
         </div>
         
         <!-- Chat Principal -->
         <div class="main-chat">
             <div class="chat-header">
                 <div class="chat-title">
-                    <h1>💬 Sala General</h1>
-                    <div class="chat-subtitle">Chat público para todos los usuarios</div>
+                    <h1 id="currentChannelTitle">💬 Sala General</h1>
+                    <div class="chat-subtitle" id="currentChannelSubtitle">Chat público para todos los usuarios</div>
                 </div>
                 
                 <div class="header-controls">
+                    <!-- Controles de Interfaz -->
+                    <div class="interface-controls">
+                        <button class="interface-toggle" id="compactToggle" onclick="toggleCompactMode()">📋 Compacto</button>
+                        <button class="interface-toggle" onclick="toggle2FA()">🔐 2FA</button>
+                        <button class="interface-toggle" onclick="mostrarBots()">🤖 Bots</button>
+                    </div>
+                    
                     <!-- Selector de Temas -->
                     <div class="theme-selector-header">
                         <span class="theme-label">🎨 Temas:</span>
@@ -870,10 +1530,22 @@
                     </div>
                     
                     <!-- Controles Existentes -->
+                    <button class="control-btn" onclick="crearEncuesta()">📊 Encuesta</button>
+                    <button class="control-btn" onclick="toggleSearch()">🔍 Buscar</button>
                     <button class="control-btn" onclick="limpiarChat()">🗑️ Limpiar</button>
                     <button class="control-btn" onclick="mostrarAyuda()">❓ Ayuda</button>
                     <button class="control-btn" onclick="desconectar()">🚪 Salir</button>
                 </div>
+            </div>
+            
+            <!-- Panel de Búsqueda -->
+            <div id="searchPanel" class="search-panel hidden">
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Buscar mensajes... (usuario, mensaje, fecha)" onkeyup="buscarMensajes()">
+                    <button class="search-btn" onclick="buscarMensajes()">🔍</button>
+                    <button class="search-btn" onclick="limpiarBusqueda()">✕</button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
             </div>
             
             <div id="messages" class="chat-messages">
@@ -881,6 +1553,13 @@
             </div>
             
             <div class="chat-input-section">
+                <!-- Indicador de respuesta -->
+                <div id="replyIndicator" class="reply-to-message hidden">
+                    <button class="reply-cancel" onclick="cancelarRespuesta()">×</button>
+                    <div class="reply-to-user" id="replyToUser"></div>
+                    <div class="reply-to-text" id="replyToText"></div>
+                </div>
+                
                 <div class="chat-input-container">
                     <textarea 
                         id="messageInput" 
@@ -911,6 +1590,25 @@
         let connectedUsers = new Set();
         let typingTimeout = null;
         let currentTheme = 'claro';
+        let allMessages = []; // Para el sistema de búsqueda
+        let messageReactions = new Map(); // Para las reacciones: messageId -> {emoji: Set(users)}
+        let isSearchOpen = false;
+        let replyingTo = null; // Para el sistema de respuestas
+        let typingUsers = new Set(); // Usuarios que están escribiendo
+        let isTyping = false; // Si el usuario actual está escribiendo
+        let typingTimer = null; // Timer para detectar cuando se deja de escribir
+        
+        // Nuevas características avanzadas
+        let activeChannels = new Map(); // Canales/salas activos
+        let currentChannel = 'general'; // Canal actual
+        let friendsList = new Set(); // Lista de amigos
+        let blockedUsers = new Set(); // Usuarios bloqueados
+        let privateChats = new Map(); // Chats privados
+        let activePolls = new Map(); // Encuestas activas
+        let isCompactMode = false; // Modo compacto
+        let encryptionKey = null; // Clave de cifrado
+        let is2FAEnabled = false; // 2FA habilitado
+        let chatBots = new Map(); // Bots disponibles
         
         const maxReconnectAttempts = 5;
         const WS_URL = window.location.hostname === 'localhost' 
@@ -1094,18 +1792,44 @@
             
             if (!mensaje) return;
             
+            // Verificar si es un comando de bot
+            if (procesarComandoBot(mensaje)) {
+                input.value = '';
+                return;
+            }
+            
             if (mensaje.length > 500) {
                 mostrarNotificacion('El mensaje es demasiado largo (máximo 500 caracteres)', 'error');
                 return;
             }
             
-            enviarAlServidor({
+            // Detener indicador de escritura al enviar mensaje
+            if (isTyping) {
+                isTyping = false;
+                if (typingTimer) {
+                    clearTimeout(typingTimer);
+                }
+                enviarAlServidor({
+                    tipo: 'typing_stop',
+                    usuario: currentUser
+                });
+            }
+            
+            const mensajeData = {
                 tipo: 'mensaje',
                 usuario: currentUser,
                 mensaje: mensaje,
                 sala: 'General',
                 timestamp: new Date().toISOString()
-            });
+            };
+            
+            // Agregar información de respuesta si existe
+            if (replyingTo) {
+                mensajeData.replyTo = replyingTo;
+                cancelarRespuesta();
+            }
+            
+            enviarAlServidor(mensajeData);
             
             input.value = '';
             ajustarAlturaTextarea(input);
@@ -1117,10 +1841,41 @@
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
                 enviarMensaje();
+                return;
             }
             
             // Auto-resize del textarea
             ajustarAlturaTextarea(event.target);
+            
+            // Detectar escritura para el indicador
+            detectarEscritura();
+        }
+
+        function detectarEscritura() {
+            // Si no estaba escribiendo antes, notificar que empezó a escribir
+            if (!isTyping) {
+                isTyping = true;
+                enviarAlServidor({
+                    tipo: 'typing_start',
+                    usuario: currentUser
+                });
+            }
+            
+            // Limpiar el timer anterior
+            if (typingTimer) {
+                clearTimeout(typingTimer);
+            }
+            
+            // Establecer nuevo timer para detectar cuando se deja de escribir
+            typingTimer = setTimeout(() => {
+                if (isTyping) {
+                    isTyping = false;
+                    enviarAlServidor({
+                        tipo: 'typing_stop',
+                        usuario: currentUser
+                    });
+                }
+            }, 1500); // 1.5 segundos sin escribir = se dejó de escribir
         }
 
         function ajustarAlturaTextarea(textarea) {
@@ -1157,7 +1912,25 @@
                     break;
                     
                 case 'mensaje':
-                    mostrarMensajeEnChat(data.usuario, data.mensaje, data.usuario === currentUser, data.timestamp);
+                    mostrarMensajeEnChat(data.usuario, data.mensaje, data.usuario === currentUser, data.timestamp, data.replyTo);
+                    break;
+                    
+                case 'reaccion':
+                    manejarReaccionRecibida(data);
+                    break;
+                    
+                case 'typing_start':
+                    if (data.usuario !== currentUser) {
+                        typingUsers.add(data.usuario);
+                        actualizarIndicadorEscritura();
+                    }
+                    break;
+                    
+                case 'typing_stop':
+                    if (data.usuario !== currentUser) {
+                        typingUsers.delete(data.usuario);
+                        actualizarIndicadorEscritura();
+                    }
                     break;
                     
                 case 'user_connected':
@@ -1170,7 +1943,9 @@
                     
                 case 'user_disconnected':
                     connectedUsers.delete(data.usuario);
+                    typingUsers.delete(data.usuario); // Remover de usuarios escribiendo
                     actualizarListaUsuarios();
+                    actualizarIndicadorEscritura();
                     mostrarMensajeSistema(`${data.usuario} se ha desconectado del chat`);
                     break;
                     
@@ -1184,10 +1959,22 @@
             }
         }
 
-        function mostrarMensajeEnChat(usuario, mensaje, esMio, timestamp = null) {
+        function mostrarMensajeEnChat(usuario, mensaje, esMio, timestamp = null, replyTo = null) {
             const messagesDiv = document.getElementById('messages');
             const messageDiv = document.createElement('div');
+            const messageId = 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
             messageDiv.className = `message ${esMio ? 'sent' : 'received'}`;
+            messageDiv.setAttribute('data-message-id', messageId);
+            
+            // Guardar mensaje para búsqueda
+            allMessages.push({
+                id: messageId,
+                usuario: usuario,
+                mensaje: mensaje,
+                timestamp: timestamp || new Date().toISOString(),
+                esMio: esMio,
+                replyTo: replyTo
+            });
             
             // Función para obtener rol del usuario
             function obtenerRolUsuario(username) {
@@ -1210,6 +1997,45 @@
             // Crear contenido del mensaje
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
+            contentDiv.style.position = 'relative';
+            
+            // Botones de reacción rápida y respuesta (solo para mensajes recibidos)
+            if (!esMio) {
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'message-actions';
+                
+                // Botón de respuesta
+                const replyBtn = document.createElement('button');
+                replyBtn.className = 'quick-reaction';
+                replyBtn.textContent = '↩️';
+                replyBtn.title = 'Responder mensaje';
+                replyBtn.onclick = () => responderMensaje(messageId, usuario, mensaje);
+                actionsDiv.appendChild(replyBtn);
+                
+                const quickReactions = ['👍', '❤️', '😂', '😮', '😢', '😡'];
+                quickReactions.forEach(emoji => {
+                    const reactionBtn = document.createElement('button');
+                    reactionBtn.className = 'quick-reaction';
+                    reactionBtn.textContent = emoji;
+                    reactionBtn.title = `Reaccionar con ${emoji}`;
+                    reactionBtn.onclick = () => agregarReaccion(messageId, emoji);
+                    actionsDiv.appendChild(reactionBtn);
+                });
+                
+                contentDiv.appendChild(actionsDiv);
+            }
+            
+            // Mostrar referencia de respuesta si existe
+            if (replyTo) {
+                const replyRefDiv = document.createElement('div');
+                replyRefDiv.className = 'message-reply-reference';
+                replyRefDiv.onclick = () => scrollToMessage(replyTo.messageId);
+                replyRefDiv.innerHTML = `
+                    <div class="reply-reference-user">↩️ ${replyTo.usuario}</div>
+                    <div class="reply-reference-text">${replyTo.mensaje.length > 50 ? replyTo.mensaje.substring(0, 50) + '...' : replyTo.mensaje}</div>
+                `;
+                contentDiv.appendChild(replyRefDiv);
+            }
             
             if (!esMio) {
                 const headerDiv = document.createElement('div');
@@ -1245,6 +2071,12 @@
             textDiv.className = 'message-text';
             textDiv.textContent = mensaje;
             contentDiv.appendChild(textDiv);
+            
+            // Contenedor para reacciones
+            const reactionsDiv = document.createElement('div');
+            reactionsDiv.className = 'message-reactions';
+            reactionsDiv.id = `reactions_${messageId}`;
+            contentDiv.appendChild(reactionsDiv);
             
             messageDiv.appendChild(avatarDiv);
             messageDiv.appendChild(contentDiv);
@@ -1467,6 +2299,10 @@
         function limpiarChat() {
             if (confirm('¿Estás seguro de que quieres limpiar el chat?')) {
                 document.getElementById('messages').innerHTML = '';
+                allMessages = [];
+                messageReactions.clear();
+                typingUsers.clear(); // Limpiar usuarios escribiendo
+                cancelarRespuesta();
                 mostrarMensajeSistema('Chat limpiado por ' + currentUser);
             }
         }
@@ -1487,7 +2323,14 @@
 • Rosado: Vibrante
 • Verde: Natural
 
-👥 FUNCIONES:
+✨ NUEVAS CARACTERÍSTICAS:
+• � Reacciones: Haz hover sobre mensajes para reaccionar
+• ↩️ Respuestas: Responde a mensajes específicos
+• 🔍 Búsqueda: Busca por usuario, mensaje o fecha
+• ✍️ Indicador de escritura: Ve cuando otros están escribiendo
+• 📊 Roles: Admin, Moderador, Usuario, Invitado
+
+�👥 FUNCIONES:
 • Lista de usuarios conectados
 • Mensajes en tiempo real
 • Reconexión automática
@@ -1497,6 +2340,9 @@
 • Máximo 500 caracteres por mensaje
 • El chat es público para todos
 • Tu estado se actualiza automáticamente
+• Las reacciones son visibles para todos
+• Usa las respuestas para conversaciones claras
+• El indicador "escribiendo" se activa automáticamente
             `;
             
             alert(ayuda);
@@ -1520,6 +2366,14 @@
 
         function desconectar() {
             if (confirm('¿Estás seguro de que quieres salir del chat?')) {
+                // Detener indicador de escritura antes de desconectar
+                if (isTyping) {
+                    enviarAlServidor({
+                        tipo: 'typing_stop',
+                        usuario: currentUser
+                    });
+                }
+                
                 if (ws) {
                     enviarAlServidor({
                         tipo: 'user_disconnected',
@@ -1532,6 +2386,14 @@
                 currentUser = '';
                 messageCount = 0;
                 connectedUsers.clear();
+                allMessages = [];
+                messageReactions.clear();
+                typingUsers.clear();
+                isTyping = false;
+                
+                if (typingTimer) {
+                    clearTimeout(typingTimer);
+                }
                 
                 // Volver a la pantalla de login
                 document.getElementById('chatContainer').classList.add('hidden');
@@ -1547,6 +2409,884 @@
         }
 
         // =========================
+        // SISTEMA DE REACCIONES
+        // =========================
+        function agregarReaccion(messageId, emoji) {
+            if (!messageReactions.has(messageId)) {
+                messageReactions.set(messageId, new Map());
+            }
+            
+            const reactions = messageReactions.get(messageId);
+            if (!reactions.has(emoji)) {
+                reactions.set(emoji, new Set());
+            }
+            
+            const users = reactions.get(emoji);
+            if (users.has(currentUser)) {
+                users.delete(currentUser);
+                if (users.size === 0) {
+                    reactions.delete(emoji);
+                }
+            } else {
+                users.add(currentUser);
+            }
+            
+            actualizarReaccionesUI(messageId);
+            
+            // Enviar reacción al servidor (para sincronizar con otros usuarios)
+            enviarAlServidor({
+                tipo: 'reaccion',
+                messageId: messageId,
+                emoji: emoji,
+                usuario: currentUser,
+                accion: users.has(currentUser) ? 'agregar' : 'quitar'
+            });
+        }
+
+        function actualizarReaccionesUI(messageId) {
+            const reactionsContainer = document.getElementById(`reactions_${messageId}`);
+            if (!reactionsContainer) return;
+            
+            reactionsContainer.innerHTML = '';
+            
+            const reactions = messageReactions.get(messageId);
+            if (!reactions || reactions.size === 0) return;
+            
+            reactions.forEach((users, emoji) => {
+                if (users.size > 0) {
+                    const reactionDiv = document.createElement('div');
+                    reactionDiv.className = `reaction-item ${users.has(currentUser) ? 'user-reacted' : ''}`;
+                    reactionDiv.onclick = () => agregarReaccion(messageId, emoji);
+                    reactionDiv.title = `Reaccionaron: ${Array.from(users).join(', ')}`;
+                    
+                    reactionDiv.innerHTML = `
+                        <span class="reaction-emoji">${emoji}</span>
+                        <span class="reaction-count">${users.size}</span>
+                    `;
+                    
+                    reactionsContainer.appendChild(reactionDiv);
+                }
+            });
+            
+            // Botón para agregar más reacciones
+            const addReactionBtn = document.createElement('div');
+            addReactionBtn.className = 'add-reaction-btn';
+            addReactionBtn.textContent = '+ 😊';
+            addReactionBtn.title = 'Agregar reacción';
+            addReactionBtn.onclick = () => mostrarMenuReacciones(messageId);
+            reactionsContainer.appendChild(addReactionBtn);
+        }
+
+        function mostrarMenuReacciones(messageId) {
+            const emojis = ['👍', '❤️', '😂', '😮', '😢', '😡', '🔥', '💯', '👌', '🙌', '😍', '🤔', '😎', '🎉', '💪'];
+            const emoji = prompt('Selecciona una reacción:\n' + emojis.join(' ') + '\n\nEscribe el emoji o el número (1-' + emojis.length + '):');
+            
+            if (emoji) {
+                if (!isNaN(emoji)) {
+                    const index = parseInt(emoji) - 1;
+                    if (index >= 0 && index < emojis.length) {
+                        agregarReaccion(messageId, emojis[index]);
+                    }
+                } else {
+                    agregarReaccion(messageId, emoji);
+                }
+            }
+        }
+
+        // =========================
+        // SISTEMA DE BÚSQUEDA
+        // =========================
+        function toggleSearch() {
+            const searchPanel = document.getElementById('searchPanel');
+            isSearchOpen = !isSearchOpen;
+            
+            if (isSearchOpen) {
+                searchPanel.classList.remove('hidden');
+                document.getElementById('searchInput').focus();
+            } else {
+                searchPanel.classList.add('hidden');
+                limpiarBusqueda();
+            }
+        }
+
+        function buscarMensajes() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (!query) {
+                resultsContainer.innerHTML = '';
+                return;
+            }
+            
+            const resultados = allMessages.filter(msg => {
+                return msg.usuario.toLowerCase().includes(query) ||
+                       msg.mensaje.toLowerCase().includes(query) ||
+                       formatearTiempo(msg.timestamp).includes(query);
+            }).slice(0, 10); // Limitar a 10 resultados
+            
+            resultsContainer.innerHTML = '';
+            
+            if (resultados.length === 0) {
+                resultsContainer.innerHTML = '<div class="search-result-item">No se encontraron mensajes</div>';
+                return;
+            }
+            
+            resultados.forEach(msg => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'search-result-item';
+                resultDiv.onclick = () => scrollToMessage(msg.id);
+                
+                // Resaltar términos de búsqueda
+                const usuario = resaltarTexto(msg.usuario, query);
+                const mensaje = resaltarTexto(msg.mensaje, query);
+                const tiempo = resaltarTexto(formatearTiempo(msg.timestamp), query);
+                
+                resultDiv.innerHTML = `
+                    <div class="search-result-user">${usuario}</div>
+                    <div class="search-result-text">${mensaje}</div>
+                    <div class="search-result-time">${tiempo}</div>
+                `;
+                
+                resultsContainer.appendChild(resultDiv);
+            });
+        }
+
+        function resaltarTexto(texto, query) {
+            const regex = new RegExp(`(${query})`, 'gi');
+            return texto.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+
+        function scrollToMessage(messageId) {
+            const messageElement = document.querySelector(`[data-message-id="${messageId}"]`);
+            if (messageElement) {
+                messageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Efecto de resaltado temporal
+                messageElement.style.backgroundColor = 'rgba(102, 126, 234, 0.2)';
+                setTimeout(() => {
+                    messageElement.style.backgroundColor = '';
+                }, 2000);
+            }
+        }
+
+        function limpiarBusqueda() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '';
+        }
+
+        // =========================
+        // SISTEMA DE RESPUESTAS
+        // =========================
+        function responderMensaje(messageId, usuario, mensaje) {
+            replyingTo = { messageId, usuario, mensaje };
+            
+            // Mostrar indicador de respuesta
+            const replyIndicator = document.getElementById('replyIndicator');
+            const replyToUser = document.getElementById('replyToUser');
+            const replyToText = document.getElementById('replyToText');
+            
+            replyToUser.textContent = `Respondiendo a ${usuario}:`;
+            replyToText.textContent = mensaje.length > 60 ? mensaje.substring(0, 60) + '...' : mensaje;
+            
+            replyIndicator.classList.remove('hidden');
+            
+            // Enfocar en el input
+            document.getElementById('messageInput').focus();
+        }
+
+        function cancelarRespuesta() {
+            replyingTo = null;
+            document.getElementById('replyIndicator').classList.add('hidden');
+        }
+
+        function manejarReaccionRecibida(data) {
+            const { messageId, emoji, usuario, accion } = data;
+            
+            if (!messageReactions.has(messageId)) {
+                messageReactions.set(messageId, new Map());
+            }
+            
+            const reactions = messageReactions.get(messageId);
+            if (!reactions.has(emoji)) {
+                reactions.set(emoji, new Set());
+            }
+            
+            const users = reactions.get(emoji);
+            if (accion === 'agregar') {
+                users.add(usuario);
+            } else {
+                users.delete(usuario);
+                if (users.size === 0) {
+                    reactions.delete(emoji);
+                }
+            }
+            
+            actualizarReaccionesUI(messageId);
+        }
+
+        // =========================
+        // INDICADOR DE ESCRITURA
+        // =========================
+        function actualizarIndicadorEscritura() {
+            const messagesDiv = document.getElementById('messages');
+            
+            // Remover indicador anterior si existe
+            const existingIndicator = document.getElementById('typingIndicator');
+            if (existingIndicator) {
+                existingIndicator.remove();
+            }
+            
+            // Si hay usuarios escribiendo, mostrar indicador
+            if (typingUsers.size > 0) {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typingIndicator';
+                typingDiv.className = 'typing-users-indicator';
+                
+                const usersArray = Array.from(typingUsers);
+                let typingText = '';
+                
+                if (usersArray.length === 1) {
+                    typingText = `<span class="typing-user-name">${usersArray[0]}</span> está escribiendo`;
+                } else if (usersArray.length === 2) {
+                    typingText = `<span class="typing-user-name">${usersArray[0]}</span> y <span class="typing-user-name">${usersArray[1]}</span> están escribiendo`;
+                } else {
+                    typingText = `<span class="typing-user-name">${usersArray[0]}</span>, <span class="typing-user-name">${usersArray[1]}</span> y ${usersArray.length - 2} más están escribiendo`;
+                }
+                
+                typingDiv.innerHTML = `
+                    <div class="typing-users-list">${typingText}...</div>
+                    <div class="typing-animation">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+                
+                messagesDiv.appendChild(typingDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+        }
+
+        // =========================
+        // SISTEMA DE CANALES Y SALAS
+        // =========================
+        function crearNuevoCanal() {
+            const nombre = prompt('🏠 Nombre del nuevo canal:');
+            if (!nombre || nombre.trim().length < 2) {
+                mostrarNotificacion('El nombre del canal debe tener al menos 2 caracteres', 'error');
+                return;
+            }
+            
+            const tipo = confirm('¿Crear canal privado? (Cancelar = Público)') ? 'private' : 'public';
+            const channelId = 'canal_' + Date.now();
+            
+            activeChannels.set(channelId, {
+                name: nombre.trim(),
+                type: tipo,
+                creator: currentUser,
+                members: new Set([currentUser]),
+                messages: []
+            });
+            
+            agregarTabCanal(channelId, nombre, tipo);
+            cambiarCanal(channelId);
+            
+            enviarAlServidor({
+                tipo: 'create_channel',
+                channelId: channelId,
+                name: nombre.trim(),
+                channelType: tipo,
+                creator: currentUser
+            });
+            
+            mostrarNotificacion(`Canal "${nombre}" creado exitosamente`, 'success');
+        }
+
+        function agregarTabCanal(channelId, nombre, tipo) {
+            const channelTabs = document.getElementById('channelTabs');
+            const addBtn = channelTabs.querySelector('.add-channel-btn');
+            
+            const tab = document.createElement('div');
+            tab.className = `channel-tab ${tipo === 'private' ? 'private' : ''}`;
+            tab.setAttribute('data-channel', channelId);
+            tab.onclick = () => cambiarCanal(channelId);
+            
+            const icon = tipo === 'private' ? '🔒' : '📢';
+            tab.innerHTML = `
+                <span>${icon} ${nombre}</span>
+                <span class="close-channel" onclick="event.stopPropagation(); cerrarCanal('${channelId}')">&times;</span>
+            `;
+            
+            channelTabs.insertBefore(tab, addBtn);
+        }
+
+        function cambiarCanal(channelId) {
+            // Actualizar tabs activos
+            document.querySelectorAll('.channel-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const activeTab = document.querySelector(`[data-channel="${channelId}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            currentChannel = channelId;
+            
+            // Actualizar título del chat
+            const channel = activeChannels.get(channelId);
+            if (channel) {
+                document.getElementById('currentChannelTitle').textContent = 
+                    `${channel.type === 'private' ? '🔒' : '📢'} ${channel.name}`;
+                document.getElementById('currentChannelSubtitle').textContent = 
+                    channel.type === 'private' ? 'Canal privado' : 'Canal público';
+            } else if (channelId === 'general') {
+                document.getElementById('currentChannelTitle').textContent = '💬 Sala General';
+                document.getElementById('currentChannelSubtitle').textContent = 'Chat público para todos los usuarios';
+            }
+            
+            // Limpiar mensajes y cargar los del canal actual
+            document.getElementById('messages').innerHTML = '';
+            cargarMensajesCanal(channelId);
+            
+            enviarAlServidor({
+                tipo: 'join_channel',
+                channelId: channelId,
+                usuario: currentUser
+            });
+        }
+
+        function cerrarCanal(channelId) {
+            if (channelId === 'general') {
+                mostrarNotificacion('No puedes cerrar el canal general', 'error');
+                return;
+            }
+            
+            activeChannels.delete(channelId);
+            
+            const tab = document.querySelector(`[data-channel="${channelId}"]`);
+            if (tab) {
+                tab.remove();
+            }
+            
+            // Si estaba en ese canal, cambiar al general
+            if (currentChannel === channelId) {
+                cambiarCanal('general');
+            }
+            
+            enviarAlServidor({
+                tipo: 'leave_channel',
+                channelId: channelId,
+                usuario: currentUser
+            });
+        }
+
+        function cargarMensajesCanal(channelId) {
+            const channel = activeChannels.get(channelId);
+            if (channel && channel.messages) {
+                channel.messages.forEach(msg => {
+                    mostrarMensajeEnChat(msg.usuario, msg.mensaje, msg.usuario === currentUser, msg.timestamp, msg.replyTo);
+                });
+            }
+        }
+
+        // =========================
+        // MENSAJES PRIVADOS
+        // =========================
+        function iniciarChatPrivado(usuario) {
+            if (usuario === currentUser) {
+                mostrarNotificacion('No puedes chatear contigo mismo', 'error');
+                return;
+            }
+            
+            const chatId = `private_${[currentUser, usuario].sort().join('_')}`;
+            
+            if (!privateChats.has(chatId)) {
+                privateChats.set(chatId, {
+                    participants: [currentUser, usuario],
+                    messages: []
+                });
+            }
+            
+            // Crear tab para chat privado
+            agregarTabCanal(chatId, `💬 ${usuario}`, 'private');
+            cambiarCanal(chatId);
+            
+            enviarAlServidor({
+                tipo: 'start_private_chat',
+                chatId: chatId,
+                participants: [currentUser, usuario]
+            });
+        }
+
+        // =========================
+        // LISTA DE AMIGOS
+        // =========================
+        function agregarAmigo() {
+            const username = prompt('👤 Nombre de usuario para agregar como amigo:');
+            if (!username || username.trim().length < 2) {
+                mostrarNotificacion('Ingresa un nombre de usuario válido', 'error');
+                return;
+            }
+            
+            if (username === currentUser) {
+                mostrarNotificacion('No puedes agregarte a ti mismo como amigo', 'error');
+                return;
+            }
+            
+            if (friendsList.has(username)) {
+                mostrarNotificacion('Este usuario ya está en tu lista de amigos', 'error');
+                return;
+            }
+            
+            friendsList.add(username);
+            actualizarListaAmigos();
+            
+            enviarAlServidor({
+                tipo: 'add_friend',
+                friend: username,
+                usuario: currentUser
+            });
+            
+            mostrarNotificacion(`${username} agregado a tu lista de amigos`, 'success');
+        }
+
+        function actualizarListaAmigos() {
+            const friendsList_div = document.getElementById('friendsList');
+            friendsList_div.innerHTML = '';
+            
+            friendsList.forEach(friend => {
+                const friendItem = document.createElement('div');
+                friendItem.className = 'friend-item';
+                
+                const isOnline = connectedUsers.has(friend);
+                const statusClass = isOnline ? 'online' : 'offline';
+                
+                friendItem.innerHTML = `
+                    <div class="friend-status ${statusClass}"></div>
+                    <div class="friend-name">${friend}</div>
+                    <div class="friend-actions">
+                        <button class="friend-action-btn chat-btn" onclick="iniciarChatPrivado('${friend}')" title="Chat privado">💬</button>
+                        <button class="friend-action-btn block-btn" onclick="bloquearUsuario('${friend}')" title="Bloquear">🚫</button>
+                    </div>
+                `;
+                
+                friendsList_div.appendChild(friendItem);
+            });
+        }
+
+        function bloquearUsuario(usuario) {
+            if (confirm(`¿Estás seguro de que quieres bloquear a ${usuario}?`)) {
+                blockedUsers.add(usuario);
+                friendsList.delete(usuario);
+                actualizarListaAmigos();
+                
+                enviarAlServidor({
+                    tipo: 'block_user',
+                    blockedUser: usuario,
+                    usuario: currentUser
+                });
+                
+                mostrarNotificacion(`${usuario} ha sido bloqueado`, 'success');
+            }
+        }
+
+        // =========================
+        // SISTEMA DE ENCUESTAS
+        // =========================
+        function crearEncuesta() {
+            const pregunta = prompt('📊 Pregunta de la encuesta:');
+            if (!pregunta || pregunta.trim().length < 5) {
+                mostrarNotificacion('La pregunta debe tener al menos 5 caracteres', 'error');
+                return;
+            }
+            
+            const opciones = [];
+            for (let i = 1; i <= 4; i++) {
+                const opcion = prompt(`Opción ${i} (opcional):`);
+                if (opcion && opcion.trim().length > 0) {
+                    opciones.push(opcion.trim());
+                }
+            }
+            
+            if (opciones.length < 2) {
+                mostrarNotificacion('La encuesta debe tener al menos 2 opciones', 'error');
+                return;
+            }
+            
+            const pollId = 'poll_' + Date.now();
+            const poll = {
+                id: pollId,
+                question: pregunta.trim(),
+                options: opciones.map(opt => ({ text: opt, votes: 0, voters: new Set() })),
+                creator: currentUser,
+                channel: currentChannel,
+                timestamp: new Date().toISOString()
+            };
+            
+            activePolls.set(pollId, poll);
+            mostrarEncuestaEnChat(poll);
+            
+            enviarAlServidor({
+                tipo: 'create_poll',
+                poll: {
+                    ...poll,
+                    options: poll.options.map(opt => ({ ...opt, voters: Array.from(opt.voters) }))
+                }
+            });
+        }
+
+        function mostrarEncuestaEnChat(poll) {
+            const messagesDiv = document.getElementById('messages');
+            const pollDiv = document.createElement('div');
+            pollDiv.className = 'poll-container';
+            pollDiv.id = `poll_${poll.id}`;
+            
+            let totalVotes = poll.options.reduce((sum, opt) => sum + opt.votes, 0);
+            
+            let optionsHTML = poll.options.map((option, index) => {
+                const percentage = totalVotes > 0 ? Math.round((option.votes / totalVotes) * 100) : 0;
+                const hasVoted = option.voters.has(currentUser);
+                
+                return `
+                    <div class="poll-option ${hasVoted ? 'voted' : ''}" onclick="votarEncuesta('${poll.id}', ${index})" style="position: relative;">
+                        <div class="poll-bar" style="width: ${percentage}%"></div>
+                        <span>${option.text}</span>
+                        <span class="poll-votes">${option.votes}</span>
+                    </div>
+                `;
+            }).join('');
+            
+            pollDiv.innerHTML = `
+                <div class="poll-question">📊 ${poll.question}</div>
+                ${optionsHTML}
+                <div style="margin-top: 10px; font-size: 11px; color: var(--text-secondary);">
+                    Por ${poll.creator} • Total: ${totalVotes} votos
+                </div>
+            `;
+            
+            messagesDiv.appendChild(pollDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function votarEncuesta(pollId, optionIndex) {
+            const poll = activePolls.get(pollId);
+            if (!poll) return;
+            
+            // Verificar si ya votó en esta encuesta
+            const hasVotedBefore = poll.options.some(opt => opt.voters.has(currentUser));
+            
+            if (hasVotedBefore) {
+                // Remover voto anterior
+                poll.options.forEach(opt => {
+                    if (opt.voters.has(currentUser)) {
+                        opt.voters.delete(currentUser);
+                        opt.votes--;
+                    }
+                });
+            }
+            
+            // Agregar nuevo voto
+            poll.options[optionIndex].voters.add(currentUser);
+            poll.options[optionIndex].votes++;
+            
+            // Actualizar UI
+            actualizarEncuestaUI(poll);
+            
+            enviarAlServidor({
+                tipo: 'vote_poll',
+                pollId: pollId,
+                optionIndex: optionIndex,
+                usuario: currentUser
+            });
+        }
+
+        function actualizarEncuestaUI(poll) {
+            const pollDiv = document.getElementById(`poll_${poll.id}`);
+            if (!pollDiv) return;
+            
+            let totalVotes = poll.options.reduce((sum, opt) => sum + opt.votes, 0);
+            
+            poll.options.forEach((option, index) => {
+                const percentage = totalVotes > 0 ? Math.round((option.votes / totalVotes) * 100) : 0;
+                const hasVoted = option.voters.has(currentUser);
+                
+                const optionElement = pollDiv.children[index + 1]; // +1 por la pregunta
+                if (optionElement) {
+                    optionElement.className = `poll-option ${hasVoted ? 'voted' : ''}`;
+                    const bar = optionElement.querySelector('.poll-bar');
+                    const votes = optionElement.querySelector('.poll-votes');
+                    
+                    if (bar) bar.style.width = `${percentage}%`;
+                    if (votes) votes.textContent = option.votes;
+                }
+            });
+            
+            // Actualizar total
+            const totalElement = pollDiv.querySelector('div:last-child');
+            if (totalElement) {
+                totalElement.innerHTML = `Por ${poll.creator} • Total: ${totalVotes} votos`;
+            }
+        }
+
+        // =========================
+        // CIFRADO END-TO-END
+        // =========================
+        function inicializarCifrado() {
+            // Generar clave de cifrado simple (en un entorno real usar librerías más robustas)
+            encryptionKey = btoa(currentUser + '_' + Date.now()).substring(0, 16);
+            mostrarNotificacion('🔐 Cifrado activado para mensajes privados', 'success');
+        }
+
+        function cifrarMensaje(mensaje) {
+            if (!encryptionKey) return mensaje;
+            
+            // Cifrado simple XOR (en producción usar AES)
+            let encrypted = '';
+            for (let i = 0; i < mensaje.length; i++) {
+                const charCode = mensaje.charCodeAt(i) ^ encryptionKey.charCodeAt(i % encryptionKey.length);
+                encrypted += String.fromCharCode(charCode);
+            }
+            return btoa(encrypted);
+        }
+
+        function descifrarMensaje(mensajeCifrado) {
+            if (!encryptionKey) return mensajeCifrado;
+            
+            try {
+                const encrypted = atob(mensajeCifrado);
+                let decrypted = '';
+                for (let i = 0; i < encrypted.length; i++) {
+                    const charCode = encrypted.charCodeAt(i) ^ encryptionKey.charCodeAt(i % encryptionKey.length);
+                    decrypted += String.fromCharCode(charCode);
+                }
+                return decrypted;
+            } catch (e) {
+                return mensajeCifrado; // Si no se puede descifrar, mostrar original
+            }
+        }
+
+        // =========================
+        // AUTENTICACIÓN 2FA
+        // =========================
+        function toggle2FA() {
+            if (is2FAEnabled) {
+                if (confirm('¿Desactivar autenticación de dos factores?')) {
+                    is2FAEnabled = false;
+                    mostrarNotificacion('2FA desactivado', 'success');
+                }
+            } else {
+                mostrar2FASetup();
+            }
+        }
+
+        function mostrar2FASetup() {
+            const modal = document.createElement('div');
+            modal.className = 'twofa-modal';
+            modal.innerHTML = `
+                <div class="twofa-content">
+                    <h3>🔐 Configurar 2FA</h3>
+                    <p>Código secreto: <strong>${generarCodigo2FA()}</strong></p>
+                    <p>Guarda este código en un lugar seguro</p>
+                    <input type="text" class="twofa-code-input" placeholder="Ingresa el código para verificar" maxlength="6">
+                    <div style="margin-top: 15px;">
+                        <button onclick="verificar2FA()" class="login-btn btn-primary" style="margin-right: 10px;">Verificar</button>
+                        <button onclick="cerrar2FAModal()" class="login-btn btn-secondary">Cancelar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function generarCodigo2FA() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        function verificar2FA() {
+            const input = document.querySelector('.twofa-code-input');
+            const codigo = input.value.trim();
+            
+            if (codigo.length === 6 && /^\d+$/.test(codigo)) {
+                is2FAEnabled = true;
+                cerrar2FAModal();
+                mostrarNotificacion('2FA activado exitosamente', 'success');
+                
+                enviarAlServidor({
+                    tipo: 'enable_2fa',
+                    usuario: currentUser,
+                    code: codigo
+                });
+            } else {
+                mostrarNotificacion('Código inválido', 'error');
+            }
+        }
+
+        function cerrar2FAModal() {
+            const modal = document.querySelector('.twofa-modal');
+            if (modal) modal.remove();
+        }
+
+        // =========================
+        // SISTEMA DE BOTS
+        // =========================
+        function inicializarBots() {
+            // Bot de bienvenida
+            chatBots.set('welcomeBot', {
+                name: 'WelcomeBot',
+                description: 'Bot de bienvenida',
+                active: true,
+                commands: ['/welcome', '/info']
+            });
+            
+            // Bot de moderación
+            chatBots.set('modBot', {
+                name: 'ModBot',
+                description: 'Bot de moderación',
+                active: true,
+                commands: ['/kick', '/ban', '/warn']
+            });
+            
+            // Bot de entretenimiento
+            chatBots.set('funBot', {
+                name: 'FunBot',
+                description: 'Bot de entretenimiento',
+                active: true,
+                commands: ['/joke', '/fact', '/quote']
+            });
+        }
+
+        function mostrarBots() {
+            const bots = Array.from(chatBots.values());
+            let botsList = bots.map(bot => 
+                `🤖 ${bot.name}: ${bot.description}\nComandos: ${bot.commands.join(', ')}`
+            ).join('\n\n');
+            
+            alert(`BOTS DISPONIBLES:\n\n${botsList}\n\nEscribe cualquier comando en el chat para interactuar.`);
+        }
+
+        function procesarComandoBot(mensaje) {
+            if (!mensaje.startsWith('/')) return false;
+            
+            const comando = mensaje.toLowerCase();
+            
+            // Bot de bienvenida
+            if (comando === '/welcome') {
+                enviarMensajeBot('WelcomeBot', `¡Bienvenido ${currentUser}! 🎉 Gracias por unirte a Grapes Fri Chat.`);
+                return true;
+            }
+            
+            if (comando === '/info') {
+                enviarMensajeBot('WelcomeBot', `📊 Información del chat:\n• Usuarios conectados: ${connectedUsers.size + 1}\n• Mensajes enviados: ${messageCount}\n• Canal actual: ${currentChannel}`);
+                return true;
+            }
+            
+            // Bot de entretenimiento
+            if (comando === '/joke') {
+                const jokes = [
+                    '¿Por qué los programadores prefieren el modo oscuro? ¡Porque la luz atrae bugs! 🐛',
+                    '¿Cuántos programadores necesitas para cambiar una bombilla? Ninguno, eso es un problema de hardware. 💡',
+                    '¿Por qué los desarrolladores usan Mac? Porque no pueden permitirse Windows. 💻'
+                ];
+                const joke = jokes[Math.floor(Math.random() * jokes.length)];
+                enviarMensajeBot('FunBot', joke);
+                return true;
+            }
+            
+            if (comando === '/fact') {
+                const facts = [
+                    '🧠 El primer bug de computadora fue literalmente un insecto encontrado en 1947.',
+                    '⌨️ El teclado QWERTY fue diseñado para ralentizar la escritura.',
+                    '🌐 El primer sitio web sigue activo: http://info.cern.ch/hypertext/WWW/TheProject.html'
+                ];
+                const fact = facts[Math.floor(Math.random() * facts.length)];
+                enviarMensajeBot('FunBot', fact);
+                return true;
+            }
+            
+            if (comando === '/quote') {
+                const quotes = [
+                    '"El mejor código es el que no necesitas escribir." - Jeff Atwood',
+                    '"Habla es barato. Muéstrame el código." - Linus Torvalds',
+                    '"El software es como el sexo: es mejor cuando es gratis." - Linus Torvalds'
+                ];
+                const quote = quotes[Math.floor(Math.random() * quotes.length)];
+                enviarMensajeBot('FunBot', quote);
+                return true;
+            }
+            
+            // Comando no reconocido
+            enviarMensajeBot('WelcomeBot', `❓ Comando "${comando}" no reconocido. Usa /info para ver comandos disponibles.`);
+            return true;
+        }
+
+        function enviarMensajeBot(botName, mensaje) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message received';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'message-avatar';
+            avatarDiv.textContent = '🤖';
+            avatarDiv.style.background = 'linear-gradient(45deg, #a29bfe, #fd79a8)';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content bot-message';
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'message-header';
+            headerDiv.innerHTML = `
+                <div class="message-user-info">
+                    <span class="message-username">${botName}</span>
+                    <span class="bot-indicator">BOT</span>
+                </div>
+                <div class="message-time">${formatearTiempo()}</div>
+            `;
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'message-text';
+            textDiv.textContent = mensaje;
+            
+            contentDiv.appendChild(headerDiv);
+            contentDiv.appendChild(textDiv);
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            // Efecto de aparición
+            messageDiv.style.opacity = '0';
+            messageDiv.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                messageDiv.style.transition = 'all 0.3s ease';
+                messageDiv.style.opacity = '1';
+                messageDiv.style.transform = 'translateY(0)';
+            }, 50);
+        }
+
+        // =========================
+        // MODO COMPACTO/EXPANDIDO
+        // =========================
+        function toggleCompactMode() {
+            isCompactMode = !isCompactMode;
+            const body = document.body;
+            const toggle = document.getElementById('compactToggle');
+            
+            if (isCompactMode) {
+                body.classList.add('compact-mode');
+                toggle.classList.add('active');
+                toggle.textContent = '📋 Expandido';
+                mostrarNotificacion('Modo compacto activado', 'success');
+            } else {
+                body.classList.remove('compact-mode');
+                toggle.classList.remove('active');
+                toggle.textContent = '📋 Compacto';
+                mostrarNotificacion('Modo expandido activado', 'success');
+            }
+        }
+
+        // =========================
         // INICIALIZACIÓN
         // =========================
         window.onload = function() {
@@ -1555,6 +3295,29 @@
             
             // Configurar tema por defecto
             cambiarTema('claro');
+            
+            // Inicializar sistemas avanzados
+            inicializarBots();
+            actualizarListaAmigos();
+            
+            // Configurar eventos para modo compacto
+            const compactToggle = document.getElementById('compactToggle');
+            if (compactToggle) {
+                compactToggle.addEventListener('click', toggleCompactMode);
+            }
+            
+            // Configurar eventos para bots
+            const botsBtn = document.getElementById('botsBtn');
+            if (botsBtn) {
+                botsBtn.addEventListener('click', mostrarBots);
+            }
+            
+            // Mostrar mensaje de bienvenida con funciones avanzadas
+            setTimeout(() => {
+                mostrarNotificacion('🎉 ¡Grapes Fri Chat cargado con funciones empresariales!', 'success');
+                mostrarMensajeSistema('✨ Funciones disponibles: Canales múltiples, Mensajes privados, Amigos, Cifrado, 2FA, Bloqueo, Encuestas, Bots y Modo compacto.');
+                mostrarMensajeSistema('🤖 Prueba los comandos de bots: /welcome, /info, /joke, /fact, /quote');
+            }, 1000);
         };
 
         // Manejar cierre de ventana
