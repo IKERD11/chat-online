@@ -3817,13 +3817,8 @@
                 return;
             }
             
-            // Verificar si el usuario coincide (opcional)
-            if (adminData.usuario && adminData.usuario !== currentUser) {
-                registrarIntentoFallido(lockKey);
-                mostrarNotificacion('🚫 Este código no está asociado a tu usuario', 'error');
-                registrarAuditoria('ADMIN_AUTH_USER_MISMATCH', currentUser, `Código para: ${adminData.usuario}`);
-                return;
-            }
+            // 🔓 CÓDIGO LIBERADO: Cualquier usuario puede usar cualquier código válido
+            // (Verificación de usuario removida para permitir uso universal)
             
             // Autenticación exitosa
             currentAdminLevel = adminData.nivel;
@@ -3843,7 +3838,7 @@
             failedAdminAttempts.delete(lockKey);
             
             mostrarNotificacion(`✅ Autenticado como ${adminData.nivel.toUpperCase()}`, 'success');
-            registrarAuditoria('ADMIN_AUTH_SUCCESS', currentUser, `Nivel: ${adminData.nivel}`);
+            registrarAuditoria('ADMIN_AUTH_SUCCESS', currentUser, `Nivel: ${adminData.nivel} | Código usado: ${codigo.substring(0, 10)}...`);
             
             cerrarAutenticacionAdmin();
             mostrarPanelAdminSeguro();
@@ -4100,7 +4095,8 @@ ${auditLogs.slice(-5).map(log =>
                     autenticarAdministrador(codigo);
                 } else {
                     mostrarNotificacion('💡 Uso: /quickadmin CODIGO', 'info');
-                    mostrarNotificacion('🔑 Códigos disponibles: GRAPE-ADMIN-2025-SECURE, MOD-HELPER-SECURE-2025, DIAMOND-ADMIN-SECURE-2025', 'info');
+                    mostrarNotificacion('🔑 Cualquier usuario puede usar cualquier código disponible', 'info');
+                    mostrarNotificacion('📋 Códigos: GRAPE-ADMIN-2025-SECURE, MOD-HELPER-SECURE-2025, DIAMOND-ADMIN-SECURE-2025', 'info');
                 }
                 return true;
             }
@@ -4119,7 +4115,8 @@ ${auditLogs.slice(-5).map(log =>
                     session ? `⏰ Expira en: ${Math.round((session.expira - Date.now()) / 1000 / 60)} min` : '',
                     `📝 Total códigos disponibles: ${Object.keys(securityConfig.adminSystem.adminCodes).length}`,
                     '',
-                    `💡 Si no tienes rol admin, usa: /admin`
+                    `� CUALQUIER USUARIO puede usar CUALQUIER CÓDIGO válido`,
+                    `💡 No importa el nombre asociado al código`
                 ].filter(line => line).join('\n');
                 
                 agregarMensaje('SystemDebug', debugInfo, new Date().toLocaleTimeString(), false);
@@ -5008,7 +5005,12 @@ ${auditLogs.slice(-5).map(log =>
             const comando = partes[0].toLowerCase();
             const parametros = partes.slice(1);
             
-            // 🔐 Comandos de administración y seguridad
+            // � DEBUG TEMPORAL
+            console.log(`🔍 PROCESANDO COMANDO: ${comando}`);
+            console.log(`📊 Usuario actual: ${currentUser}`);
+            console.log(`📝 Parámetros: ${parametros.join(', ')}`);
+            
+            // �🔐 Comandos de administración y seguridad
             if (procesarComandoAdmin(comando, parametros)) {
                 return true;
             }
@@ -5043,13 +5045,17 @@ ${auditLogs.slice(-5).map(log =>
 • /quote - Cita inspiradora
 • /security - Estado de seguridad
 
-🛡️ SEGURIDAD (Solo admins):
+🛡️ SEGURIDAD Y ADMINISTRACIÓN:
 • /admin - Panel de administración
-• /logs - Ver audit logs
-• /block [usuario] - Bloquear usuario
-• /unblock [usuario] - Desbloquear usuario
-• /ban_ip [ip] - Bloquear IP
-• /whitelist [ip] - Agregar a whitelist
+• /quickadmin [CODIGO] - Autenticación rápida (universal)
+• /debug - Ver estado de administrador actual
+• /logs - Ver audit logs (solo admins)
+• /block [usuario] - Bloquear usuario (solo admins)
+• /unblock [usuario] - Desbloquear usuario (solo admins)
+• /ban_ip [ip] - Bloquear IP (solo admins)
+• /whitelist [ip] - Agregar a whitelist (solo admins)
+
+🔓 NOTA: Cualquier usuario puede usar cualquier código de admin válido
 
 ⚙️ CONFIGURACIÓN:
 • /clear - Limpiar chat

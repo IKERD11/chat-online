@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug - Comandos Admin</title>
+</head>
+<body>
+    <h1>🔧 Debug de Comandos de Administrador</h1>
+    
+    <div id="debug-info"></div>
+    
+    <h2>Comandos para probar en la consola:</h2>
+    <pre>
+// 1. Activar administrador
+autenticarAdministrador('GRAPE-ADMIN-2025-SECURE');
+
+// 2. Verificar estado
+console.log('¿Es admin?', esAdministrador());
+console.log('Rol:', obtenerRolUsuario());
+
+// 3. Probar comando debug
+procesarComandoBot('/debug');
+
+// 4. Probar comando quickadmin
+procesarComandoBot('/quickadmin GRAPE-ADMIN-2025-SECURE');
+
+// 5. Mostrar todos los códigos disponibles
+console.log('Códigos admin:', Object.keys(securityConfig.adminSystem.adminCodes));
+    </pre>
+    
+    <h2>Códigos disponibles:</h2>
+    <ul>
+        <li><strong>GRAPE-ADMIN-2025-SECURE</strong> - Super Admin</li>
+        <li><strong>DIAMOND-ADMIN-SECURE-2025</strong> - Super Admin</li>
+        <li><strong>MOD-HELPER-SECURE-2025</strong> - Moderador</li>
+        <li><strong>EMERALD-MOD-SECURE-2025</strong> - Moderador</li>
+        <li><strong>GOLD-ADMIN-SECURE-2025</strong> - Super Admin Temporal</li>
+        <li><strong>SILVER-MOD-SECURE-2025</strong> - Moderador Nuevo</li>
+    </ul>
+    
+    <h2>Instrucciones:</h2>
+    <ol>
+        <li>Abre la consola del navegador (F12)</li>
+        <li>Ejecuta los comandos de arriba uno por uno</li>
+        <li>Ve de vuelta al chat y prueba <code>/debug</code></li>
+        <li>Si funciona, ya tienes acceso de administrador</li>
+    </ol>
+</body>
+</html>
