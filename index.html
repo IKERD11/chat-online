@@ -2493,6 +2493,27 @@
                         usuario: 'Moderador1', 
                         nivel: 'moderador', 
                         expira: Date.now() + (90 * 24 * 60 * 60 * 1000) // 90 días
+                    },
+                    // 🔥 NUEVOS CÓDIGOS DE ADMINISTRADOR
+                    'DIAMOND-ADMIN-SECURE-2025': { 
+                        usuario: 'AdminAmigo1', 
+                        nivel: 'super', 
+                        expira: Date.now() + (365 * 24 * 60 * 60 * 1000) // 1 año
+                    },
+                    'EMERALD-MOD-SECURE-2025': { 
+                        usuario: 'ModeradorAmigo', 
+                        nivel: 'moderador', 
+                        expira: Date.now() + (180 * 24 * 60 * 60 * 1000) // 6 meses
+                    },
+                    'GOLD-ADMIN-SECURE-2025': { 
+                        usuario: 'AdminTemporal', 
+                        nivel: 'super', 
+                        expira: Date.now() + (30 * 24 * 60 * 60 * 1000) // 30 días
+                    },
+                    'SILVER-MOD-SECURE-2025': { 
+                        usuario: 'ModeradorNuevo', 
+                        nivel: 'moderador', 
+                        expira: Date.now() + (60 * 24 * 60 * 60 * 1000) // 60 días
                     }
                 }
             }
@@ -3475,16 +3496,38 @@
             
             // Función para obtener rol del usuario (VERSIÓN SEGURA)
             function obtenerRolUsuario(username) {
+                // 🐛 DEBUG: Verificación de estado de administrador
+                const isAdminSuper = esAdministrador('super');
+                const isAdminMod = esAdministrador('moderador');
+                const hasAdminSession = adminSessions.has(currentUser);
+                
+                console.log(`🔍 DEBUG ROL USUARIO: ${username}`);
+                console.log(`📊 Usuario actual: ${currentUser}`);
+                console.log(`🔑 Es Super Admin: ${isAdminSuper}`);
+                console.log(`🔒 Es Moderador: ${isAdminMod}`);
+                console.log(`💼 Tiene sesión admin: ${hasAdminSession}`);
+                
+                if (hasAdminSession) {
+                    const session = adminSessions.get(currentUser);
+                    console.log(`⏰ Sesión expira en: ${Math.round((session.expira - Date.now()) / 1000 / 60)} minutos`);
+                    console.log(`📋 Nivel de sesión: ${session.nivel}`);
+                }
+                
                 // Verificar si tiene sesión de administrador activa
                 if (esAdministrador('super') && username === currentUser) {
+                    console.log(`✅ Asignando rol: Super Admin`);
                     return { rol: 'Super Admin', color: '#e74c3c' };
                 } else if (esAdministrador('moderador') && username === currentUser) {
+                    console.log(`✅ Asignando rol: Admin`);
                     return { rol: 'Admin', color: '#e67e22' };
                 } else if (username.toLowerCase().includes('mod') || username.toLowerCase().includes('moderador')) {
+                    console.log(`✅ Asignando rol: Moderador (por nombre)`);
                     return { rol: 'Moderador', color: '#f39c12' };
                 } else if (username.toLowerCase().includes('guest') || username.toLowerCase().includes('invitado')) {
+                    console.log(`✅ Asignando rol: Invitado`);
                     return { rol: 'Invitado', color: '#95a5a6' };
                 } else {
+                    console.log(`✅ Asignando rol: Usuario`);
                     return { rol: 'Usuario', color: '#3498db' };
                 }
             }
@@ -4044,16 +4087,52 @@ ${auditLogs.slice(-5).map(log =>
         }
         
         function procesarComandoAdmin(comando, parametros) {
-            if (!currentUser || !currentUser.toLowerCase().includes('admin')) {
-                mostrarNotificacion('🚫 Comando de administrador requerido', 'error');
+            // ⚡ COMANDO ESPECIAL: /admin no requiere permisos (es para autenticarse)
+            if (comando.toLowerCase() === '/admin') {
+                mostrarPanelAdmin();
+                return true;
+            }
+            
+            // ⚡ COMANDO RÁPIDO: /quickadmin para acceso directo
+            if (comando.toLowerCase() === '/quickadmin') {
+                const codigo = parametros[0];
+                if (codigo) {
+                    autenticarAdministrador(codigo);
+                } else {
+                    mostrarNotificacion('💡 Uso: /quickadmin CODIGO', 'info');
+                    mostrarNotificacion('🔑 Códigos disponibles: GRAPE-ADMIN-2025-SECURE, MOD-HELPER-SECURE-2025, DIAMOND-ADMIN-SECURE-2025', 'info');
+                }
+                return true;
+            }
+            
+            // ⚡ COMANDO ESPECIAL: /debug disponible para todos
+            if (comando.toLowerCase() === '/debug') {
+                const hasSession = adminSessions.has(currentUser);
+                const session = hasSession ? adminSessions.get(currentUser) : null;
+                const debugInfo = [
+                    `🔍 ESTADO DE ADMINISTRADOR:`,
+                    `📊 Usuario: ${currentUser}`,
+                    `🔑 Es Super Admin: ${esAdministrador('super')}`,
+                    `🔒 Es Moderador: ${esAdministrador('moderador')}`,
+                    `💼 Tiene sesión activa: ${hasSession}`,
+                    session ? `📋 Nivel: ${session.nivel}` : '❌ Sin sesión',
+                    session ? `⏰ Expira en: ${Math.round((session.expira - Date.now()) / 1000 / 60)} min` : '',
+                    `📝 Total códigos disponibles: ${Object.keys(securityConfig.adminSystem.adminCodes).length}`,
+                    '',
+                    `💡 Si no tienes rol admin, usa: /admin`
+                ].filter(line => line).join('\n');
+                
+                agregarMensaje('SystemDebug', debugInfo, new Date().toLocaleTimeString(), false);
+                return true;
+            }
+            
+            // 🔐 PARA OTROS COMANDOS: Verificar permisos de administrador
+            if (!esAdministrador('moderador')) {
+                mostrarNotificacion('🚫 Acceso denegado. Usa /admin para autenticarte primero', 'error');
                 return false;
             }
             
             switch(comando.toLowerCase()) {
-                case '/admin':
-                    mostrarPanelAdmin();
-                    return true;
-                    
                 case '/logs':
                     mostrarAuditLogs();
                     return true;
