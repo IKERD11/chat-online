@@ -1865,10 +1865,300 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            max-width: 600px;
+            max-width: 800px;
             max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 🔐 ESTILOS PARA AUTENTICACIÓN DE ADMINISTRADOR */
+        .admin-auth-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 15000;
+            animation: authModalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes authModalFadeIn {
+            from {
+                opacity: 0;
+                backdrop-filter: blur(0px);
+            }
+            to {
+                opacity: 1;
+                backdrop-filter: blur(5px);
+            }
+        }
+
+        .admin-auth-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 90%;
+            color: white;
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .auth-form {
+            margin-bottom: 20px;
+        }
+
+        .admin-auth-input {
+            width: 100%;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .admin-auth-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .admin-auth-input:focus {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .auth-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .auth-btn.primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .auth-btn.primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .auth-btn.secondary {
+            background: rgba(231, 76, 60, 0.8);
+            color: white;
+        }
+
+        .auth-btn.secondary:hover {
+            background: rgba(231, 76, 60, 1);
+            transform: translateY(-2px);
+        }
+
+        .auth-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .auth-info small {
+            opacity: 0.8;
+            font-size: 12px;
+        }
+
+        /* Estilos para el panel de administración mejorado */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .admin-session-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 12px;
+        }
+
+        .admin-level {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .session-timer {
+            background: rgba(253, 203, 110, 0.2);
+            color: var(--warning-color);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: var(--error-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .admin-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .admin-section {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .admin-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-action-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+            color: var(--text-primary);
+        }
+
+        .admin-action-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .admin-action-btn.danger {
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        .admin-action-btn.danger:hover {
+            background: var(--error-color);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .close-panel-btn {
+            background: rgba(108, 117, 125, 0.1);
+            color: var(--text-secondary);
+            border: 2px solid var(--border-color);
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .close-panel-btn:hover {
+            background: rgba(108, 117, 125, 0.2);
+            transform: translateY(-1px);
         }
 
         /* Indicador de estado de sistema */
@@ -2054,6 +2344,7 @@
                     </div>
                     
                     <!-- Controles Existentes -->
+                    <button class="control-btn" onclick="comandoAdmin()">🔐 Admin</button>
                     <button class="control-btn" onclick="crearEncuesta()">📊 Encuesta</button>
                     <button class="control-btn" onclick="toggleSearch()">🔍 Buscar</button>
                     <button class="control-btn" onclick="limpiarChat()">🗑️ Limpiar</button>
@@ -2182,8 +2473,36 @@
                 suspiciousActivityThreshold: 10,
                 rapidConnectionAttempts: 5,
                 timeWindow: 60000 // 1 minuto en ms
+            },
+            // 🛡️ NUEVO SISTEMA DE ADMINISTRACIÓN SEGURO
+            adminSystem: {
+                enabled: true,
+                requireMasterKey: true,
+                require2FA: true,
+                sessionTimeout: 1800000, // 30 minutos
+                maxFailedAttempts: 3,
+                lockoutDuration: 900000, // 15 minutos
+                adminCodes: {
+                    // Códigos únicos de administrador (se pueden cambiar)
+                    'GRAPE-ADMIN-2025-SECURE': { 
+                        usuario: 'IKERD11', 
+                        nivel: 'super', 
+                        expira: Date.now() + (365 * 24 * 60 * 60 * 1000) // 1 año
+                    },
+                    'MOD-HELPER-SECURE-2025': { 
+                        usuario: 'Moderador1', 
+                        nivel: 'moderador', 
+                        expira: Date.now() + (90 * 24 * 60 * 60 * 1000) // 90 días
+                    }
+                }
             }
         };
+        
+        // 🔐 Variables de administración segura
+        let adminSessions = new Map(); // Sesiones de administrador activas
+        let failedAdminAttempts = new Map(); // Intentos fallidos por IP/usuario
+        let adminTokens = new Map(); // Tokens de sesión de administrador
+        let currentAdminLevel = null; // Nivel de administrador actual
         
         let auditLogs = []; // 📊 Registro de auditoría
         let userMetrics = new Map(); // Métricas por usuario
@@ -2994,10 +3313,13 @@
                 replyTo: replyTo
             });
             
-            // Función para obtener rol del usuario
+            // Función para obtener rol del usuario (VERSIÓN SEGURA)
             function obtenerRolUsuario(username) {
-                if (username.toLowerCase().includes('admin') || username === 'IKERD11') {
-                    return { rol: 'Admin', color: '#e74c3c' };
+                // Verificar si tiene sesión de administrador activa
+                if (esAdministrador('super') && username === currentUser) {
+                    return { rol: 'Super Admin', color: '#e74c3c' };
+                } else if (esAdministrador('moderador') && username === currentUser) {
+                    return { rol: 'Admin', color: '#e67e22' };
                 } else if (username.toLowerCase().includes('mod') || username.toLowerCase().includes('moderador')) {
                     return { rol: 'Moderador', color: '#f39c12' };
                 } else if (username.toLowerCase().includes('guest') || username.toLowerCase().includes('invitado')) {
@@ -3151,11 +3473,13 @@
             const usersList = document.getElementById('usersList');
             usersList.innerHTML = '';
             
-            // Función para obtener rol del usuario
+            // Función para obtener rol del usuario (VERSIÓN SEGURA)
             function obtenerRolUsuario(username) {
-                // Determinar rol basado en el nombre de usuario o lógica personalizada
-                if (username.toLowerCase().includes('admin') || username === 'IKERD11') {
-                    return { rol: 'Admin', color: '#e74c3c' };
+                // Verificar si tiene sesión de administrador activa
+                if (esAdministrador('super') && username === currentUser) {
+                    return { rol: 'Super Admin', color: '#e74c3c' };
+                } else if (esAdministrador('moderador') && username === currentUser) {
+                    return { rol: 'Admin', color: '#e67e22' };
                 } else if (username.toLowerCase().includes('mod') || username.toLowerCase().includes('moderador')) {
                     return { rol: 'Moderador', color: '#f39c12' };
                 } else if (username.toLowerCase().includes('guest') || username.toLowerCase().includes('invitado')) {
@@ -3381,7 +3705,179 @@
             alert(ayuda);
         }
 
-        // 🔐 FUNCIONES DE ADMINISTRACIÓN Y CONTROL AVANZADO
+        // 🔐 FUNCIONES DE AUTENTICACIÓN DE ADMINISTRADOR SEGURA
+        
+        function solicitarAutenticacionAdmin() {
+            const modal = document.createElement('div');
+            modal.className = 'admin-auth-modal';
+            modal.innerHTML = `
+                <div class="admin-auth-content">
+                    <div class="auth-header">
+                        <h3>🔐 Autenticación de Administrador</h3>
+                        <p>Ingresa tu código de administrador seguro</p>
+                    </div>
+                    <div class="auth-form">
+                        <input type="password" id="adminCode" placeholder="Código de administrador..." class="admin-auth-input">
+                        <input type="text" id="admin2FA" placeholder="Código 2FA (opcional)" class="admin-auth-input">
+                        <div class="auth-buttons">
+                            <button onclick="autenticarAdmin()" class="auth-btn primary">🔓 Autenticar</button>
+                            <button onclick="cerrarAutenticacionAdmin()" class="auth-btn secondary">❌ Cancelar</button>
+                        </div>
+                    </div>
+                    <div class="auth-info">
+                        <small>⚠️ Los intentos fallidos son registrados y monitoreados</small>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            document.getElementById('adminCode').focus();
+            
+            // Permitir Enter para autenticar
+            document.getElementById('adminCode').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') autenticarAdmin();
+            });
+        }
+        
+        function autenticarAdmin() {
+            const codigo = document.getElementById('adminCode').value;
+            const codigo2FA = document.getElementById('admin2FA').value;
+            const userIP = '127.0.0.1'; // En producción sería la IP real
+            
+            // Verificar si el usuario está bloqueado
+            const lockKey = `${currentUser}-${userIP}`;
+            const failedAttempts = failedAdminAttempts.get(lockKey) || { count: 0, lastAttempt: 0 };
+            
+            if (failedAttempts.count >= securityConfig.adminSystem.maxFailedAttempts) {
+                const tiempoRestante = Math.ceil((securityConfig.adminSystem.lockoutDuration - (Date.now() - failedAttempts.lastAttempt)) / 60000);
+                if (tiempoRestante > 0) {
+                    mostrarNotificacion(`🚫 Acceso bloqueado por ${tiempoRestante} minutos más`, 'error');
+                    cerrarAutenticacionAdmin();
+                    return;
+                }
+            }
+            
+            // Verificar código de administrador
+            const adminData = securityConfig.adminSystem.adminCodes[codigo];
+            
+            if (!adminData) {
+                registrarIntentoFallido(lockKey);
+                mostrarNotificacion('❌ Código de administrador inválido', 'error');
+                registrarAuditoria('ADMIN_AUTH_FAILED', currentUser, `Código inválido: ${codigo.substring(0, 5)}...`);
+                return;
+            }
+            
+            // Verificar expiración
+            if (adminData.expira < Date.now()) {
+                mostrarNotificacion('⏰ Código de administrador expirado', 'error');
+                registrarAuditoria('ADMIN_AUTH_EXPIRED', currentUser, 'Código expirado');
+                return;
+            }
+            
+            // Verificar si el usuario coincide (opcional)
+            if (adminData.usuario && adminData.usuario !== currentUser) {
+                registrarIntentoFallido(lockKey);
+                mostrarNotificacion('🚫 Este código no está asociado a tu usuario', 'error');
+                registrarAuditoria('ADMIN_AUTH_USER_MISMATCH', currentUser, `Código para: ${adminData.usuario}`);
+                return;
+            }
+            
+            // Autenticación exitosa
+            currentAdminLevel = adminData.nivel;
+            const sessionToken = generarTokenSeguro();
+            const sessionData = {
+                usuario: currentUser,
+                nivel: adminData.nivel,
+                inicio: Date.now(),
+                expira: Date.now() + securityConfig.adminSystem.sessionTimeout,
+                token: sessionToken
+            };
+            
+            adminSessions.set(currentUser, sessionData);
+            adminTokens.set(sessionToken, sessionData);
+            
+            // Limpiar intentos fallidos
+            failedAdminAttempts.delete(lockKey);
+            
+            mostrarNotificacion(`✅ Autenticado como ${adminData.nivel.toUpperCase()}`, 'success');
+            registrarAuditoria('ADMIN_AUTH_SUCCESS', currentUser, `Nivel: ${adminData.nivel}`);
+            
+            cerrarAutenticacionAdmin();
+            mostrarPanelAdminSeguro();
+            
+            // Programar expiración de sesión
+            setTimeout(() => {
+                if (adminSessions.has(currentUser)) {
+                    cerrarSesionAdmin();
+                    mostrarNotificacion('⏰ Sesión de administrador expirada', 'warning');
+                }
+            }, securityConfig.adminSystem.sessionTimeout);
+        }
+        
+        function registrarIntentoFallido(lockKey) {
+            const actual = failedAdminAttempts.get(lockKey) || { count: 0, lastAttempt: 0 };
+            actual.count++;
+            actual.lastAttempt = Date.now();
+            failedAdminAttempts.set(lockKey, actual);
+            
+            if (actual.count >= securityConfig.adminSystem.maxFailedAttempts) {
+                mostrarNotificacion(`🚨 Demasiados intentos fallidos. Bloqueado por ${securityConfig.adminSystem.lockoutDuration / 60000} minutos`, 'error');
+                registrarAuditoria('ADMIN_LOCKOUT', currentUser, `IP: ${lockKey}`);
+            }
+        }
+        
+        function generarTokenSeguro() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let token = '';
+            for (let i = 0; i < 32; i++) {
+                token += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return token + '-' + Date.now();
+        }
+        
+        function verificarSesionAdmin() {
+            const session = adminSessions.get(currentUser);
+            if (!session) return false;
+            
+            if (session.expira < Date.now()) {
+                cerrarSesionAdmin();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function cerrarSesionAdmin() {
+            const session = adminSessions.get(currentUser);
+            if (session) {
+                adminTokens.delete(session.token);
+                adminSessions.delete(currentUser);
+            }
+            currentAdminLevel = null;
+            registrarAuditoria('ADMIN_LOGOUT', currentUser, 'Sesión cerrada');
+        }
+        
+        function cerrarAutenticacionAdmin() {
+            const modal = document.querySelector('.admin-auth-modal');
+            if (modal) modal.remove();
+        }
+        
+        // Función para verificar si el usuario es administrador (reemplaza las verificaciones inseguras)
+        function esAdministrador(nivel = 'moderador') {
+            if (!verificarSesionAdmin()) return false;
+            
+            const session = adminSessions.get(currentUser);
+            if (!session) return false;
+            
+            switch (nivel) {
+                case 'super':
+                    return session.nivel === 'super';
+                case 'moderador':
+                    return ['super', 'moderador'].includes(session.nivel);
+                default:
+                    return false;
+            }
+        }
         // =========================
         
         function inicializarSistemasSeguridad() {
@@ -3404,44 +3900,95 @@
         }
         
         function mostrarPanelAdmin() {
-            if (!currentUser || !currentUser.toLowerCase().includes('admin')) {
-                mostrarNotificacion('🚫 Acceso denegado: Solo administradores', 'error');
-                registrarAuditoria('ADMIN_ACCESS_DENIED', currentUser, 'Intento de acceso no autorizado');
+            if (!esAdministrador('moderador')) {
+                mostrarNotificacion('🚫 Acceso denegado: Autenticación requerida', 'error');
+                solicitarAutenticacionAdmin();
                 return;
             }
+            mostrarPanelAdminSeguro();
+        }
+        
+        function mostrarPanelAdminSeguro() {
+            if (!esAdministrador('moderador')) {
+                mostrarNotificacion('🚫 Acceso denegado: Autenticación requerida', 'error');
+                solicitarAutenticacionAdmin();
+                return;
+            }
+
+            const session = adminSessions.get(currentUser);
+            const tiempoRestante = Math.ceil((session.expira - Date.now()) / 60000);
             
-            const panel = `
-🔐 PANEL DE ADMINISTRACIÓN
-
-📊 ESTADÍSTICAS DE SEGURIDAD:
-• Usuarios conectados: ${connectedUsers.size}/${securityConfig.userLimits.maxConcurrentUsers}
-• Mensajes bloqueados hoy: ${auditLogs.filter(log => log.evento.includes('SPAM') && isToday(log.timestamp)).length}
-• IPs bloqueadas: ${securityConfig.ipControl.blacklist.size}
-• Alertas de intrusión: ${auditLogs.filter(log => log.evento === 'INTRUSION_ALERT').length}
-
-🚫 ACCIONES DISPONIBLES:
-/block [usuario] - Bloquear usuario
-/unblock [usuario] - Desbloquear usuario
-/ban_ip [ip] - Bloquear IP
-/whitelist [ip] - Agregar IP a whitelist
-/mute [usuario] - Silenciar usuario
-/kick [usuario] - Expulsar usuario
-/logs - Ver audit logs
-/security - Estado de seguridad
-
-⚙️ CONFIGURACIÓN:
-• Anti-spam: ${securityConfig.antiSpam.enabled ? '✅ Activo' : '❌ Inactivo'}
-• Control IP: ${securityConfig.ipControl.enabled ? '✅ Activo' : '❌ Inactivo'}
-• Detección intrusos: ${securityConfig.intrusionDetection.enabled ? '✅ Activo' : '❌ Inactivo'}
-• Bot moderador: ${moderationBot ? '✅ Activo' : '❌ Inactivo'}
+            const panelHTML = `
+                <div class="admin-panel">
+                    <div class="admin-content">
+                        <div class="admin-header">
+                            <h2>🔐 PANEL DE ADMINISTRACIÓN SEGURO</h2>
+                            <div class="admin-session-info">
+                                <span class="admin-level">Nivel: ${session.nivel.toUpperCase()}</span>
+                                <span class="session-timer">⏱️ ${tiempoRestante} min restantes</span>
+                                <button onclick="cerrarSesionAdmin(); cerrarPanelAdmin();" class="logout-btn">🚪 Cerrar Sesión</button>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-sections">
+                            <div class="admin-section">
+                                <h3>👥 Gestión de Usuarios</h3>
+                                <button onclick="mostrarUsuariosConectados()" class="admin-action-btn">Ver Usuarios Conectados</button>
+                                <button onclick="mostrarHistorialUsuarios()" class="admin-action-btn">Historial de Usuarios</button>
+                                ${session.nivel === 'super' ? '<button onclick="banearUsuario()" class="admin-action-btn danger">🚫 Banear Usuario</button>' : ''}
+                            </div>
+                            
+                            <div class="admin-section">
+                                <h3>� Seguridad y Auditoría</h3>
+                                <button onclick="mostrarLogsSeguridad()" class="admin-action-btn">Ver Logs de Seguridad</button>
+                                <button onclick="mostrarActividadSospechosa()" class="admin-action-btn">Actividad Sospechosa</button>
+                                <button onclick="mostrarIntentosIntrusión()" class="admin-action-btn">Intentos de Intrusión</button>
+                            </div>
+                            
+                            <div class="admin-section">
+                                <h3>🛠️ Configuración del Sistema</h3>
+                                <button onclick="configurarSistema()" class="admin-action-btn">Configurar Sistema</button>
+                                <button onclick="actualizarCodigosAdmin()" class="admin-action-btn">Gestionar Códigos Admin</button>
+                                ${session.nivel === 'super' ? '<button onclick="resetearSistema()" class="admin-action-btn danger">⚠️ Reset Sistema</button>' : ''}
+                            </div>
+                            
+                            <div class="admin-section">
+                                <h3>📈 Estadísticas</h3>
+                                <div class="stats-grid">
+                                    <div class="stat-card">
+                                        <span class="stat-number">${connectedUsers.size}</span>
+                                        <span class="stat-label">Usuarios Online</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-number">${auditLogs.length}</span>
+                                        <span class="stat-label">Eventos de Auditoría</span>
+                                    </div>
+                                    <div class="stat-card">
+                                        <span class="stat-number">${failedAdminAttempts.size}</span>
+                                        <span class="stat-label">Intentos Admin Fallidos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-footer">
+                            <button onclick="cerrarPanelAdmin()" class="close-panel-btn">❌ Cerrar Panel</button>
+                        </div>
+                    </div>
+                </div>
             `;
             
-            alert(panel);
-            registrarAuditoria('ADMIN_PANEL_ACCESS', currentUser, 'Panel de administración consultado');
+            document.body.insertAdjacentHTML('beforeend', panelHTML);
+            registrarAuditoria('ADMIN_PANEL_ACCESS', currentUser, `Nivel: ${session.nivel}`);
+        }
+        
+        function cerrarPanelAdmin() {
+            const panel = document.querySelector('.admin-panel');
+            if (panel) panel.remove();
         }
         
         function mostrarAuditLogs() {
-            if (!currentUser || !currentUser.toLowerCase().includes('admin')) {
+            if (!esAdministrador('moderador')) {
                 mostrarNotificacion('🚫 Acceso denegado: Solo administradores', 'error');
                 return;
             }
@@ -4925,7 +5472,141 @@ ${auditLogs.slice(-5).map(log =>
         // Inicializar nuevas funcionalidades
         document.addEventListener('DOMContentLoaded', () => {
             solicitarPermisoNotificaciones();
+            
+            // Inicializar sistema de administración seguro
+            inicializarSistemaAdmin();
         });
+        
+        function inicializarSistemaAdmin() {
+            // Verificar si hay sesiones expiradas
+            setInterval(() => {
+                for (const [usuario, session] of adminSessions.entries()) {
+                    if (session.expira < Date.now()) {
+                        adminSessions.delete(usuario);
+                        adminTokens.delete(session.token);
+                        if (usuario === currentUser) {
+                            currentAdminLevel = null;
+                            mostrarNotificacion('⏰ Sesión de administrador expirada', 'warning');
+                        }
+                    }
+                }
+            }, 60000); // Verificar cada minuto
+            
+            // Limpiar intentos fallidos antiguos
+            setInterval(() => {
+                const ahora = Date.now();
+                for (const [key, data] of failedAdminAttempts.entries()) {
+                    if (ahora - data.lastAttempt > securityConfig.adminSystem.lockoutDuration) {
+                        failedAdminAttempts.delete(key);
+                    }
+                }
+            }, 300000); // Limpiar cada 5 minutos
+        }
+        
+        // Funciones adicionales para el panel de administración
+        function mostrarUsuariosConectados() {
+            const usuarios = Array.from(connectedUsers).map(user => {
+                const session = adminSessions.get(user);
+                return `${user} ${session ? `(${session.nivel})` : '(usuario)'}`;
+            }).join('\n');
+            
+            alert(`👥 USUARIOS CONECTADOS (${connectedUsers.size}):\n\n${usuarios}`);
+        }
+        
+        function mostrarLogsSeguridad() {
+            const logs = auditLogs.slice(-10).map(log => 
+                `[${new Date(log.timestamp).toLocaleTimeString()}] ${log.evento}: ${log.usuario} - ${log.detalles}`
+            ).join('\n');
+            
+            alert(`📊 LOGS DE SEGURIDAD (Últimos 10):\n\n${logs}`);
+        }
+        
+        function mostrarActividadSospechosa() {
+            const sospechosa = auditLogs.filter(log => 
+                ['SPAM_DETECTED', 'ADMIN_AUTH_FAILED', 'INTRUSION_ALERT'].includes(log.evento)
+            ).slice(-5);
+            
+            const texto = sospechosa.map(log => 
+                `[${new Date(log.timestamp).toLocaleTimeString()}] ${log.evento}: ${log.usuario}`
+            ).join('\n');
+            
+            alert(`⚠️ ACTIVIDAD SOSPECHOSA:\n\n${texto || 'No hay actividad sospechosa reciente'}`);
+        }
+        
+        function actualizarCodigosAdmin() {
+            if (!esAdministrador('super')) {
+                mostrarNotificacion('🚫 Solo super administradores pueden gestionar códigos', 'error');
+                return;
+            }
+            
+            const accion = prompt('Acciones disponibles:\n1. Ver códigos\n2. Generar nuevo código\n3. Revocar código\n\nIngresa el número:');
+            
+            switch(accion) {
+                case '1':
+                    const codigos = Object.keys(securityConfig.adminSystem.adminCodes).map(codigo => 
+                        `${codigo}: ${securityConfig.adminSystem.adminCodes[codigo].nivel} (${securityConfig.adminSystem.adminCodes[codigo].usuario})`
+                    ).join('\n');
+                    alert(`🔑 CÓDIGOS ACTIVOS:\n\n${codigos}`);
+                    break;
+                    
+                case '2':
+                    generarNuevoCodigoAdmin();
+                    break;
+                    
+                case '3':
+                    revocarCodigoAdmin();
+                    break;
+                    
+                default:
+                    mostrarNotificacion('❌ Acción inválida', 'error');
+            }
+        }
+        
+        function generarNuevoCodigoAdmin() {
+            const usuario = prompt('Usuario para el nuevo código:');
+            const nivel = prompt('Nivel (super/moderador):');
+            const dias = parseInt(prompt('Días de validez:')) || 30;
+            
+            if (!usuario || !['super', 'moderador'].includes(nivel)) {
+                mostrarNotificacion('❌ Datos inválidos', 'error');
+                return;
+            }
+            
+            const nuevoCodigo = `GRAPE-${nivel.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
+            const expira = Date.now() + (dias * 24 * 60 * 60 * 1000);
+            
+            securityConfig.adminSystem.adminCodes[nuevoCodigo] = {
+                usuario: usuario,
+                nivel: nivel,
+                expira: expira
+            };
+            
+            alert(`✅ NUEVO CÓDIGO GENERADO:\n\nCódigo: ${nuevoCodigo}\nUsuario: ${usuario}\nNivel: ${nivel}\nExpira: ${new Date(expira).toLocaleDateString()}\n\n⚠️ Guarda este código de forma segura`);
+            
+            registrarAuditoria('ADMIN_CODE_GENERATED', currentUser, `Nuevo código para ${usuario} (${nivel})`);
+        }
+        
+        function revocarCodigoAdmin() {
+            const codigos = Object.keys(securityConfig.adminSystem.adminCodes);
+            const codigoToRevoke = prompt(`Códigos disponibles:\n${codigos.join('\n')}\n\nIngresa el código a revocar:`);
+            
+            if (securityConfig.adminSystem.adminCodes[codigoToRevoke]) {
+                delete securityConfig.adminSystem.adminCodes[codigoToRevoke];
+                mostrarNotificacion('✅ Código revocado exitosamente', 'success');
+                registrarAuditoria('ADMIN_CODE_REVOKED', currentUser, `Código revocado: ${codigoToRevoke.substring(0, 10)}...`);
+            } else {
+                mostrarNotificacion('❌ Código no encontrado', 'error');
+            }
+        }
+        
+        // Comando para acceso rápido de administrador
+        function comandoAdmin() {
+            if (currentAdminLevel) {
+                mostrarPanelAdminSeguro();
+            } else {
+                solicitarAutenticacionAdmin();
+            }
+        }
     </script>
 </body>
 </html>
