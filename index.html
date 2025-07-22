@@ -151,6 +151,84 @@
             margin-right: 8px;
             animation: pulse 2s infinite;
             flex-shrink: 0;
+            position: relative;
+        }
+
+        /* Estados de usuario mejorados */
+        .user-status.online { 
+            background: var(--success-color);
+            box-shadow: 0 0 8px rgba(0, 184, 148, 0.5);
+        }
+        
+        .user-status.away { 
+            background: var(--warning-color);
+            box-shadow: 0 0 8px rgba(253, 203, 110, 0.5);
+        }
+        
+        .user-status.busy { 
+            background: var(--error-color);
+            box-shadow: 0 0 8px rgba(225, 112, 85, 0.5);
+        }
+        
+        .user-status.invisible { 
+            background: #95a5a6;
+            box-shadow: none;
+            animation: none;
+        }
+
+        .user-status.streaming {
+            background: linear-gradient(45deg, #9b59b6, #e74c3c);
+            animation: streamingPulse 1.5s infinite;
+        }
+
+        @keyframes streamingPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 6px rgba(155, 89, 182, 0);
+            }
+        }
+
+        /* Selector de estado */
+        .status-selector {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            min-width: 150px;
+            top: 100%;
+            right: 0;
+        }
+
+        .status-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .status-option:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .status-option .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        /* Indicador de actividad personalizado */
+        .custom-status {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-left: 5px;
         }
 
         .user-info {
@@ -448,6 +526,139 @@
             font-size: 14px;
             line-height: 1.4;
             word-wrap: break-word;
+        }
+
+        /* Sistema de Menciones */
+        .mention {
+            background: rgba(102, 126, 234, 0.2);
+            color: var(--primary-color);
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mention:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .mention-popup {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            min-width: 150px;
+        }
+
+        .mention-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mention-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .mention-item img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+
+        /* Mensajes de Voz */
+        .voice-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(76, 190, 140, 0.1);
+            border: 1px solid rgba(76, 190, 140, 0.3);
+            border-radius: 20px;
+            padding: 10px 15px;
+            margin: 5px 0;
+        }
+
+        .voice-play-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: var(--success-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .voice-play-btn:hover {
+            background: #00a085;
+            transform: scale(1.1);
+        }
+
+        .voice-waveform {
+            flex: 1;
+            height: 30px;
+            background: rgba(0, 184, 148, 0.2);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .voice-progress {
+            height: 100%;
+            background: var(--success-color);
+            border-radius: 15px;
+            transition: width 0.1s;
+        }
+
+        .voice-duration {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .voice-record-btn {
+            background: var(--error-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .voice-record-btn.recording {
+            animation: recordingPulse 1s infinite;
+        }
+
+        @keyframes recordingPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(225, 112, 85, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(225, 112, 85, 0);
+            }
+        }
+
+        .voice-record-time {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--error-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
         }
 
         /* Reacciones a mensajes */
@@ -766,6 +977,131 @@
             justify-content: center;
             font-size: 18px;
             transition: all 0.2s;
+        }
+
+        /* Sistema de Archivos Mejorado */
+        .file-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            background: rgba(102, 126, 234, 0.05);
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--primary-color);
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.02);
+        }
+
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .file-item {
+            position: relative;
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 200px;
+        }
+
+        .file-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .file-item .file-info {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .file-remove {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--error-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        /* Mensajes con archivos */
+        .message-file {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .message-file:hover {
+            background: rgba(102, 126, 234, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .file-size {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .file-download {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 12px;
+            cursor: pointer;
         }
 
         .send-btn {
@@ -1748,17 +2084,33 @@
                     <div class="reply-to-text" id="replyToText"></div>
                 </div>
                 
+                <!-- Área de carga de archivos -->
+                <div id="fileUploadArea" class="file-upload-area hidden">
+                    <input type="file" id="fileInput" class="file-input" multiple accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.txt">
+                    <div class="upload-text">
+                        📁 Arrastra archivos aquí o haz clic para seleccionar
+                        <br><small>Máximo 10MB por archivo</small>
+                    </div>
+                    <div id="filePreview" class="file-preview"></div>
+                </div>
+                
                 <div class="chat-input-container">
                     <textarea 
                         id="messageInput" 
                         class="message-input" 
-                        placeholder="Escribe tu mensaje aquí... (Presiona Enter para enviar, Shift+Enter para nueva línea)" 
+                        placeholder="Escribe un mensaje... (@ para mencionar, : para emojis, Enter para enviar)" 
                         onkeydown="manejarTeclado(event)"
+                        oninput="detectarEscritura(); ajustarAlturaTextarea(this); detectarMenciones(this.value)"
                         rows="1"
                     ></textarea>
                     
                     <div class="input-actions">
-                        <button class="action-btn emoji-btn" onclick="mostrarEmojis()" title="Emojis">😊</button>
+                        <button class="action-btn emoji-btn" onclick="toggleEmojiPicker()" title="Emojis">😊</button>
+                        <button class="action-btn" style="background: #17a2b8; color: white;" onclick="toggleFileUpload()" title="Archivos">📎</button>
+                        <button id="voiceBtn" class="action-btn voice-record-btn" onclick="toggleVoiceRecording()" title="Mensaje de voz">
+                            🎤
+                            <div id="voiceRecordTime" class="voice-record-time hidden">0:00</div>
+                        </button>
                         <button class="action-btn send-btn" onclick="enviarMensaje()" title="Enviar mensaje">➤</button>
                     </div>
                 </div>
@@ -4264,6 +4616,315 @@ ${auditLogs.slice(-5).map(log =>
             }, 30000);
             
             console.log('✅ Sistema de seguridad listo');
+        });
+
+        // =========================
+        // 🚀 NUEVAS FUNCIONALIDADES MEJORADAS
+        // =========================
+        
+        // Sistema de archivos mejorado
+        let selectedFiles = [];
+        let isFileUploadOpen = false;
+        
+        function toggleFileUpload() {
+            const area = document.getElementById('fileUploadArea');
+            isFileUploadOpen = !isFileUploadOpen;
+            area.classList.toggle('hidden', !isFileUploadOpen);
+            
+            if (isFileUploadOpen) {
+                setupFileDragAndDrop();
+            }
+        }
+        
+        function setupFileDragAndDrop() {
+            const area = document.getElementById('fileUploadArea');
+            const input = document.getElementById('fileInput');
+            
+            area.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                area.classList.add('dragover');
+            });
+            
+            area.addEventListener('dragleave', () => {
+                area.classList.remove('dragover');
+            });
+            
+            area.addEventListener('drop', (e) => {
+                e.preventDefault();
+                area.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            input.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+        }
+        
+        function handleFiles(files) {
+            for (let file of files) {
+                if (file.size > 10 * 1024 * 1024) { // 10MB límite
+                    mostrarNotificacion(`El archivo ${file.name} es muy grande (máximo 10MB)`, 'error');
+                    continue;
+                }
+                
+                selectedFiles.push(file);
+                mostrarVistaPrevia(file);
+            }
+        }
+        
+        function mostrarVistaPrevia(file) {
+            const preview = document.getElementById('filePreview');
+            const div = document.createElement('div');
+            div.className = 'file-item';
+            
+            if (file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                div.appendChild(img);
+            } else {
+                const icon = document.createElement('div');
+                icon.className = 'file-icon';
+                icon.textContent = getFileIcon(file.type);
+                div.appendChild(icon);
+            }
+            
+            const info = document.createElement('div');
+            info.className = 'file-info';
+            info.innerHTML = `
+                <div class="file-name">${file.name}</div>
+                <div class="file-size">${formatFileSize(file.size)}</div>
+            `;
+            div.appendChild(info);
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'file-remove';
+            removeBtn.textContent = '×';
+            removeBtn.onclick = () => {
+                selectedFiles = selectedFiles.filter(f => f !== file);
+                div.remove();
+            };
+            div.appendChild(removeBtn);
+            
+            preview.appendChild(div);
+        }
+        
+        function getFileIcon(type) {
+            if (type.startsWith('image/')) return '🖼️';
+            if (type.startsWith('video/')) return '🎥';
+            if (type.startsWith('audio/')) return '🎵';
+            if (type.includes('pdf')) return '📄';
+            if (type.includes('word')) return '📝';
+            return '📁';
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Sistema de menciones
+        let mentionPopup = null;
+        let mentionUsers = [];
+        
+        function detectarMenciones(texto) {
+            const cursorPos = document.getElementById('messageInput').selectionStart;
+            const textoHastaCursor = texto.slice(0, cursorPos);
+            const ultimaArroba = textoHastaCursor.lastIndexOf('@');
+            
+            if (ultimaArroba !== -1 && ultimaArroba === textoHastaCursor.length - 1) {
+                mostrarPopupMenciones();
+            } else if (ultimaArroba !== -1) {
+                const busqueda = textoHastaCursor.slice(ultimaArroba + 1);
+                if (busqueda.length > 0) {
+                    filtrarMenciones(busqueda);
+                }
+            } else {
+                ocultarPopupMenciones();
+            }
+        }
+        
+        function mostrarPopupMenciones() {
+            if (mentionPopup) return;
+            
+            const input = document.getElementById('messageInput');
+            mentionPopup = document.createElement('div');
+            mentionPopup.className = 'mention-popup';
+            
+            // Obtener usuarios conectados para menciones
+            mentionUsers = Array.from(connectedUsers);
+            
+            mentionUsers.forEach(user => {
+                const item = document.createElement('div');
+                item.className = 'mention-item';
+                item.innerHTML = `
+                    <div class="user-status online"></div>
+                    <span>${user}</span>
+                `;
+                item.onclick = () => insertarMencion(user);
+                mentionPopup.appendChild(item);
+            });
+            
+            input.parentNode.style.position = 'relative';
+            input.parentNode.appendChild(mentionPopup);
+        }
+        
+        function filtrarMenciones(busqueda) {
+            if (!mentionPopup) return;
+            
+            const items = mentionPopup.querySelectorAll('.mention-item');
+            items.forEach(item => {
+                const texto = item.textContent.toLowerCase();
+                item.style.display = texto.includes(busqueda.toLowerCase()) ? 'flex' : 'none';
+            });
+        }
+        
+        function insertarMencion(usuario) {
+            const input = document.getElementById('messageInput');
+            const texto = input.value;
+            const cursorPos = input.selectionStart;
+            const ultimaArroba = texto.slice(0, cursorPos).lastIndexOf('@');
+            
+            const nuevoTexto = texto.slice(0, ultimaArroba) + `@${usuario} ` + texto.slice(cursorPos);
+            input.value = nuevoTexto;
+            input.focus();
+            
+            ocultarPopupMenciones();
+        }
+        
+        function ocultarPopupMenciones() {
+            if (mentionPopup) {
+                mentionPopup.remove();
+                mentionPopup = null;
+            }
+        }
+        
+        // Sistema de mensajes de voz
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let isRecording = false;
+        let recordingTimer = null;
+        let recordingStartTime = 0;
+        
+        async function toggleVoiceRecording() {
+            if (!isRecording) {
+                await iniciarGrabacion();
+            } else {
+                detenerGrabacion();
+            }
+        }
+        
+        async function iniciarGrabacion() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+                
+                mediaRecorder.ondataavailable = (event) => {
+                    audioChunks.push(event.data);
+                };
+                
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    procesarAudioGrabado(audioBlob);
+                };
+                
+                mediaRecorder.start();
+                isRecording = true;
+                recordingStartTime = Date.now();
+                
+                const btn = document.getElementById('voiceBtn');
+                const timer = document.getElementById('voiceRecordTime');
+                btn.classList.add('recording');
+                timer.classList.remove('hidden');
+                
+                recordingTimer = setInterval(() => {
+                    const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+                    const minutes = Math.floor(elapsed / 60);
+                    const seconds = elapsed % 60;
+                    timer.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                }, 1000);
+                
+            } catch (error) {
+                mostrarNotificacion('❌ No se pudo acceder al micrófono', 'error');
+            }
+        }
+        
+        function detenerGrabacion() {
+            if (mediaRecorder && isRecording) {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                
+                isRecording = false;
+                clearInterval(recordingTimer);
+                
+                const btn = document.getElementById('voiceBtn');
+                const timer = document.getElementById('voiceRecordTime');
+                btn.classList.remove('recording');
+                timer.classList.add('hidden');
+            }
+        }
+        
+        function procesarAudioGrabado(audioBlob) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const audioData = reader.result;
+                const duracion = Math.floor((Date.now() - recordingStartTime) / 1000);
+                
+                enviarMensajeVoz(audioData, duracion);
+            };
+            reader.readAsDataURL(audioBlob);
+        }
+        
+        function enviarMensajeVoz(audioData, duracion) {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                enviarAlServidor({
+                    tipo: 'mensaje_voz',
+                    usuario: currentUser,
+                    audio: audioData,
+                    duracion: duracion,
+                    canal: currentChannel,
+                    timestamp: new Date().toISOString()
+                });
+                
+                mostrarNotificacion('🎤 Mensaje de voz enviado', 'success');
+            }
+        }
+        
+        // Sistema de notificaciones push mejorado
+        function solicitarPermisoNotificaciones() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        mostrarNotificacion('🔔 Notificaciones activadas', 'success');
+                    }
+                });
+            }
+        }
+        
+        function mostrarNotificacionPush(titulo, mensaje, usuario = null) {
+            if (Notification.permission === 'granted' && document.hidden) {
+                const notification = new Notification(titulo, {
+                    body: mensaje,
+                    icon: '🍇',
+                    badge: '🍇',
+                    tag: 'chat-message'
+                });
+                
+                notification.onclick = () => {
+                    window.focus();
+                    notification.close();
+                };
+                
+                setTimeout(() => notification.close(), 5000);
+            }
+        }
+        
+        // Inicializar nuevas funcionalidades
+        document.addEventListener('DOMContentLoaded', () => {
+            solicitarPermisoNotificaciones();
         });
     </script>
 </body>
