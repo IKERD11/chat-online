@@ -43,7 +43,7 @@ Una aplicación de chat moderna y completa con cliente desktop (PyQt5) y web (HT
 
 ## 🚀 **Demo en Vivo**
 
-- **🌐 Versión Web**: [https://tu-usuario.github.io/chat-online](https://tu-usuario.github.io/chat-online)
+- **🌐 Versión Web**: https://ikerd11.github.io/chat-online/
 - **📱 Funciona en móviles** y tablets
 - **⚡ Tiempo real** con WebSockets
 
